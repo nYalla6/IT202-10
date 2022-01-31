@@ -1,8 +1,6 @@
-#output from homework is inserted here
-
 <table><tr><td> <em>Assignment: </em> S22-M1-GettingStarted</td></tr>
 <tr><td> <em>Student: </em> Namitha Yalla(ny6)</td></tr>
-<tr><td> <em>Generated: </em> 1/30/2022 8:29:42 PM</td></tr>
+<tr><td> <em>Generated: </em> 1/30/2022 8:35:33 PM</td></tr>
 <tr><td> <em>Grading Link: </em> <a href="https://learn.ethereallab.app/homework/IT202-010-S22/s22-m1-gettingstarted/grade/ny6" target="_blank">Grading</a></table>
 <table><tr><td> <em>Instructions: </em> <ol>
 <li>Create a repository on github, use the format [course]-[section] as the repository name.</li>
@@ -57,8 +55,8 @@
 <tr><td><table><tr><td> <em>Sub-Task 1: </em> Did you have any issues? If so, how did you resolve them? If no issues, just type "no issues".</td></tr>
 <tr><td> <em>Response:</em> <p>The screenshots initially for the homework were difficult to figure out before the<br>guide. Also, I initially did the first part of the homework before we<br>went through the practice in class, and then redid it so if that<br>exists in the history that&#39;s why. <br></p><br></td></tr>
 </table></td></tr>
-<table><tr><td> <em>Deliverable 5: </em> Pull Request Link </td><tr><td><em>Status: </em> <img width="100" height="20" src="https://via.placeholder.com/400x120/ff0000/000000?text=Incomplete"></td></tr>
+<table><tr><td> <em>Deliverable 5: </em> Pull Request Link </td><tr><td><em>Status: </em> <img width="100" height="20" src="https://via.placeholder.com/400x120/009955/fff?text=Complete"></td></tr>
 <tr><td><table><tr><td> <em>Sub-Task 1: </em> Add the pull request link here (it should end in /pull/#)</td></tr>
-<tr><td>Not provided</td></tr>
+<tr><td>[https://github.com/nYalla6/IT202-10/pull/5](https://github.com/nYalla6/IT202-10/pull/5)</td></tr>
 </table></td></tr>
 <table><tr><td><em>Grading Link: </em><a href="https://learn.ethereallab.app/homework/IT202-010-S22/s22-m1-gettingstarted/grade/ny6" target="_blank">Grading</a></td></tr></table>
