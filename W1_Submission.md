@@ -1,6 +1,6 @@
 <table><tr><td> <em>Assignment: </em> S22-M1-GettingStarted</td></tr>
 <tr><td> <em>Student: </em> Namitha Yalla(ny6)</td></tr>
-<tr><td> <em>Generated: </em> 1/30/2022 8:35:33 PM</td></tr>
+<tr><td> <em>Generated: </em> 1/30/2022 8:55:24 PM</td></tr>
 <tr><td> <em>Grading Link: </em> <a href="https://learn.ethereallab.app/homework/IT202-010-S22/s22-m1-gettingstarted/grade/ny6" target="_blank">Grading</a></table>
 <table><tr><td> <em>Instructions: </em> <ol>
 <li>Create a repository on github, use the format [course]-[section] as the repository name.</li>
@@ -37,6 +37,21 @@
 <tr><td><table><tr><td> <em>Sub-Task 1: </em> Screenshot showing requested extensions installed</td></tr>
 <tr><td><table><tr><td><img width="768px" src="https://user-images.githubusercontent.com/98120848/151725282-f2cf9de6-2d09-4c7e-9264-4f18030d1381.png"/></td></tr>
 <tr><td> <em>Caption:</em> <p>Proof of the MySQL installation<br></p>
+</td></tr>
+<tr><td><img width="768px" src="https://user-images.githubusercontent.com/98120848/151728546-82873018-4d6e-4d4e-97f4-4ef70e616640.png"/></td></tr>
+<tr><td> <em>Caption:</em> <p>Auto Rename downloaded<br></p>
+</td></tr>
+<tr><td><img width="768px" src="https://user-images.githubusercontent.com/98120848/151728608-6c2e28fa-d797-4718-aacb-cd124934d8ea.png"/></td></tr>
+<tr><td> <em>Caption:</em> <p>GitLens was downloaded<br></p>
+</td></tr>
+<tr><td><img width="768px" src="https://user-images.githubusercontent.com/98120848/151728677-c1667e4f-eff1-45f0-bd52-838cc6374444.png"/></td></tr>
+<tr><td> <em>Caption:</em> <p>WakaTime downloaded<br></p>
+</td></tr>
+<tr><td><img width="768px" src="https://user-images.githubusercontent.com/98120848/151728741-dfb15d5a-eb9c-40b3-8345-0a06ae5f62f4.png"/></td></tr>
+<tr><td> <em>Caption:</em> <p>Todo Tree downloaded<br></p>
+</td></tr>
+<tr><td><img width="768px" src="https://user-images.githubusercontent.com/98120848/151728841-e950b674-5425-4e77-a247-e3c14f716121.png"/></td></tr>
+<tr><td> <em>Caption:</em> <p>PHP Intelephense downloaded<br></p>
 </td></tr>
 </table></td></tr>
 </table></td></tr>
