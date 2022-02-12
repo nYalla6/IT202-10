@@ -8,6 +8,15 @@ function bePositive($arr) {
     echo "<br>Processing Array:<br><pre>" . var_export($arr, true) . "</pre>";
     echo "<br>Positive output:<br>";
     //TODO use echo to output all of the values as positive (even if they were originally positive)
+    
+    foreach($arr as $curNum){
+        //only multiply by -1, if negative
+        if($curNum < 0){
+            $curNum *= -1;
+        }
+
+        echo $curNum . " ";
+    }
 
 }
 echo "Problem 3: Be Positive<br>";
