@@ -8,6 +8,17 @@
         window.addEventListener("load", () => {
             console.log("loaded via javascript");
             //TODO: add any extra onload processing you may need here
+            
+            window.addEventListener("hashchange", function () {
+                currentHash = window.location.hash;
+                link = document.querySelector(`a[href="${currentHash}"]`);
+                
+                //prints the link text to the h1 element
+                document.querySelector("h1").innerText = link.innerText;
+
+                //prints the link text to the title tag element
+                document.querySelector("title").innerText = link.innerText;
+            });
         });
         function getCurrentSelection() {
             setTimeout(() => {
@@ -15,12 +26,62 @@
                 //TODO: add code for processing the current selection 
 
                 //Note: likely you'll want to call updateCurrentPage towards the end
+                updateCurrentPage();
             }, 100);
         }
     </script>
+
     <style>
         /* TODO: make edits here */
+
+        /* making navbar horizontal */
+        nav {
+            background-color: burlywood;
+        }
+        nav ul {
+            width: 100%; 
+            display: flex;
+        }
+
+        /* spacing out the nav elements */
+        nav ul li {
+            margin-right: 25px;
+            list-style-type: none;
+        }
+
+        /*making the list have checkmarks*/
+        ul > li > ul:nth-child(2) {
+            list-style-type: '\2713';;
+        }
+
+        /*hovering over a link changes the color*/
+        a:hover{
+            color: chartreuse;
+        }
+
+        /*make the first letter of h1 and a capital*/
+        a, h1 {
+            text-transform: capitalize;
+        }
+
+        /*my own addition: css color animations */
+        /* The animation code */
+        @keyframes blueToPurple {
+        from {background-color: rgb(0, 204, 255);}
+        to {background-color: rgb(183, 0, 255);}
+        }
+
+        /* The element to apply the animation to */
+        h1 {
+        /* width: 25%; */
+        background-color: rgb(183, 0, 255);
+        animation-name: blueToPurple;
+        animation-duration: 4s;
+        animation-iteration-count: infinite;
+        }
+
     </style>
+
     <!-- make the necessary edits above this line -->
 
 
