@@ -1,6 +1,9 @@
 <?php
 //TODO 1: require db.php
-//include vs rquire: wants vs needs to run
+//include vs require: wants vs needs to run
+
+//__DIR__ gets the current php file gives the absolute path
+//and less likely to make mistakes
 require_once(__DIR__ . "/db.php");
 
 //require safer_echo.php
