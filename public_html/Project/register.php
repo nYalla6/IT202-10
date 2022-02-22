@@ -59,7 +59,7 @@ if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm
     }
     if (!$hasError) {
         //TODO 4
-        echo "Welcome, $email";
+        echo "Welcome, $email ";
         $hash = password_hash($password, PASSWORD_BCRYPT);
         $db = getDB();
         $stmt = $db->prepare("INSERT INTO Users (email, password) VALUES(:email, :password)");
