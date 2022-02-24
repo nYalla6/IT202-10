@@ -26,6 +26,7 @@ require_once(__DIR__ . "/../lib/functions.php");
 <nav>
     <ul>
         <!-- this is based on location instead of logic -->
+        
         <?php if (is_logged_in()) : ?>
             <li><a href="home.php">Home</a></li>
         <?php endif; ?>
