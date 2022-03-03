@@ -17,7 +17,24 @@
 ### Proposal Checklist and Evidence
 
 - Milestone 1
-  - (duplicate template here for Milestone 1 features)  
+    - [ ] \(mm/dd/yyyy of completion) Feature Title (from the proposal bullet point, if it's a sub-point indent it properly)
+    -  Link to related .md file: [Link Name](link url)
+    - [ ] \(mm/dd/yyyy of completion) Feature Title (from the proposal bullet point, if it's a sub-point indent it properly)
+    -  Link to related .md file: [Link Name](link url)
+    - [ ] \(mm/dd/yyyy of completion) Feature Title (from the proposal bullet point, if it's a sub-point indent it properly)
+    -  Link to related .md file: [Link Name](link url)
+    - [ ] \(mm/dd/yyyy of completion) Feature Title (from the proposal bullet point, if it's a sub-point indent it properly)
+    -  Link to related .md file: [Link Name](link url)
+    - [ ] \(mm/dd/yyyy of completion) Feature Title (from the proposal bullet point, if it's a sub-point indent it properly)
+    -  Link to related .md file: [Link Name](link url)
+    - [ ] \(mm/dd/yyyy of completion) Feature Title (from the proposal bullet point, if it's a sub-point indent it properly)
+    -  Link to related .md file: [Link Name](link url)
+    - [ ] \(mm/dd/yyyy of completion) Feature Title (from the proposal bullet point, if it's a sub-point indent it properly)
+    -  Link to related .md file: [Link Name](link url)
+    - [ ] \(mm/dd/yyyy of completion) Feature Title (from the proposal bullet point, if it's a sub-point indent it properly)
+    -  Link to related .md file: [Link Name](link url)
+    - [ ] \(mm/dd/yyyy of completion) Feature Title (from the proposal bullet point, if it's a sub-point indent it properly)
+    -  Link to related .md file: [Link Name](link url)
 - Milestone 2
   - (duplicate template here for Milestone 1 features)
 - Milestone 3
