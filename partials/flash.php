@@ -37,6 +37,6 @@
     }
 
     .alert-info {
-        background-color: aliceblue;
+        background-color: lightblue;
     }
 </style>
