@@ -25,7 +25,7 @@
 </script>
 <style>
     .alert-success {
-        background-color: green
+        background-color: lightgreen;
     }
 
     .alert-warning {
