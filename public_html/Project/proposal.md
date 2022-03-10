@@ -3,7 +3,7 @@
 ## Github Link: (Prod Branch of Project Folder)
 ## Project Board Link: 
 ## Website Link: (Heroku Prod of Project folder)
-## Your Name:
+## Your Name: Namitha Yalla
 
 <!-- Line item / Feature template (use this for each bullet point) -- DO NOT DELETE THIS SECTION
 
@@ -19,7 +19,7 @@
 ### Proposal Checklist and Evidence
 
 - Milestone 1
-    - [ ] \(mm/dd/yyyy of completion) User will be able to register a new account
+    - [X] \(02/13/2022) User will be able to register a new account
       - Form Fields
         - Username, email, password, confirm password(other fields optional)
         - Email is required and must be validated
@@ -34,7 +34,7 @@
         -  The only fields that may be cleared are the password fields
     -  Link to .md file: [Link Name](link url)
 
-    - [ ] \(mm/dd/yyyy of completion) User will be able to login to their account (given they enter the correct credentials)
+    - [X] \(02/14/2022) User will be able to login to their account (given they enter the correct credentials)
       * Form
           * User can login with **email **or **username**
               * This can be done as a single field or as two separate fields
