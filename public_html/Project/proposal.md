@@ -44,10 +44,12 @@
       * User will be directed to a landing page upon login
         * This is a protected page (non-logged in users shouldn’t have access)
         * This can be home, profile, a dashboard, etc
+        
     - [X] \(mm/dd/yyyy of completion) User will be able to logout
       * Logging out will redirect to login page
       * User should see a message that they’ve successfully logged out
       * Session should be destroyed (so the back button doesn’t allow them access back in)
+       
     - [X] \(mm/dd/yyyy of completion) Basic security rules implemented
       * Authentication:
           * Function to check if user is logged in
@@ -55,7 +57,7 @@
       * Roles/Authorization:
           * Have a roles table (see below)
           
-    - [X] \(mm/dd/yyyy of completion) Basic Roles implemented
+    - [ ] \(mm/dd/yyyy of completion) Basic Roles implemented
       * Have a <span style="text-decoration:underline;">Roles</span> table	(id, name, description, is_active, modified, created)
       * Have a <span style="text-decoration:underline;">User Roles</span> table (id, user_id, role_id, is_active, created, modified)
       * Include a function to check if a user has a specific role (we won’t use it for this milestone but it should be usable in the future)
