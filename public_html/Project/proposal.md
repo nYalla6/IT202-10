@@ -1,8 +1,8 @@
 # Project Name: Simple Shop
 ## Project Summary: This project will create a simple e-commerce site for users. Administrators or store owners will be able to manage inventory and users will be able to manage their cart and place orders.
 ## Github Link: (Prod Branch of Project Folder)
-## Project Board Link: 
-## Website Link: (Heroku Prod of Project folder)
+## Project Board Link: [Project_Board](https://github.com/nYalla6/IT202-10/projects/1)
+## Website Link: [Heroku Prod](https://ny6-prod.herokuapp.com/Project/login.php)
 ## Your Name: Namitha Yalla
 
 <!-- Line item / Feature template (use this for each bullet point) -- DO NOT DELETE THIS SECTION
@@ -32,7 +32,6 @@
       - Username should be unique
       - System should let user know if username or email is taken and allow the user to correct the error without wiping/clearing the form
         -  The only fields that may be cleared are the password fields
-    -  Link to .md file: [Link Name](link url)
 
     - [X] \(02/14/2022) User will be able to login to their account (given they enter the correct credentials)
       * Form
