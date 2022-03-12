@@ -126,7 +126,7 @@
   * [ ] \(mm/dd/yyyy of completion) User will be able t o clear their entire cart via a button click
  
 - Milestone 3
-  * User will be able to purchase items in their Cart
+  * [ ] \(mm/dd/yyyy of completion) User will be able to purchase items in their Cart
     * Create an <span style="text-decoration:underline;">Orders</span> table (id, user_id, created, total_price, address, payment_method, money_received)
         * Payment method will simply record (Cash, Visa, MasterCard, Amex, etc) We will **not** be recording CC numbers or anything of that nature, this is just a sample and in real world projects you’d commonly use a third party payment processor
         * Hint: This must be inserted first before you can insert into the OrderItems table
@@ -143,13 +143,7 @@
     * User will be asked for their Address for shipping purposes
         * Address form should validate correctly
             * Use this as a rough guide (likely you’ll want to prefill some of the data you already have about the user)
-            * 
-
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image1.png "image_tooltip")
-
+            * ![milestone3](https://user-images.githubusercontent.com/98120848/157999525-1cc7af68-55e0-468e-bb6e-529c3011c30c.png)
     * Order process (comment each part of the process):
         * Calculate Cart Items
         * **Verify the current product price against the Products table**
@@ -166,22 +160,55 @@
         * **Update the Products table Stock for each item to deduct the Ordered Quantity**
         * Clear out the user’s cart after successful order
         * Redirect user to Order Confirmation Page
-* Order Confirmation Page
+        * 
+* [ ] \(mm/dd/yyyy of completion) Order Confirmation Page
     * Show the entire order details from the Order and OrderItems table (similar to cart)
         * Including a the cost of each line item and the total value
         * Show how they purchased and how much they paid
     * Displays a Thank you message
-* User will be able to see their Purchase History
+    
+* [ ] \(mm/dd/yyyy of completion) User will be able to see their Purchase History
     * For now limit to 10 most recent orders
     * Show a summary of relevant information
     * A list item can be clicked to view the full details in the Order Details Page (similar to Order Confirmation Page except no “Thank you” message)
-* Store Owner will be able to see all Purchase History
+    
+* [ ] \(mm/dd/yyyy of completion) Store Owner will be able to see all Purchase History
     * For now limit to 10 most recent orders
     * A list item can be clicked to view the full details in the Order Details Page (similar to Order Confirmation Page except no “Thank you” message)
 
 - Milestone 4
-  - (duplicate template here for Milestone 1 features)
-  - 
+  * [ ] \(mm/dd/yyyy of completion) User can set their profile to be public or private (will need another column in Users table)
+      * If profile is public, hide email address from **other** users (email address should not be publicly visible to others)
+  * [ ] \(mm/dd/yyyy of completion) User will be able to rate a product they purchased
+      * Create table called <span style="text-decoration:underline;">Ratings</span> (id, product_id, user_id, rating, comment, created, modified)
+      * 1-5 rating
+      * Text Comment (use TEXT data type in sql)
+      * Must be done on the Product Details Page
+      * Ratings and Rating Comments will be visible on the Product Details page
+          * Show the latest 10 reviews
+          * Paginate anything beyond 10
+      * Show the average rating on the Product Details Page
+  * [ ] \(mm/dd/yyyy of completion) User’s Purchase History Changes
+      * Filter by date range
+      * Filter by category
+      * Sort by total, date purchased, etc
+      * Add pagination
+          * Any filter/sort applied must be followed during the pagination process
+  * [ ] \(mm/dd/yyyy of completion) Store Owner Purchase History Changes
+      * Filter by Date Range
+      * Filter by Category
+      * Sort by total, date purchased, etc
+      * Add pagination
+          * Any filter/sort applied must be followed during the pagination process
+      * The result page should show the accurate **total price** of the combined search results (i.e., if just 3 records show each of $25, it should show $75 total for this view)
+  * [ ] \(mm/dd/yyyy of completion) Add pagination to Shop Page (and any other product lists not yet mentioned)
+  * [ ] \(mm/dd/yyyy of completion) Store Owner will be able to see all products out of stock
+      * This will be added as a filter to their product list page from Milestone 2
+      * Pagination should account for this new filter
+      * Recommended to have the filter applied as a given value (i.e., where quantity is &lt;= value)
+  * [ ] \(mm/dd/yyyy of completion) User can sort products by average rating on the Shop Page
+      * Hint: may want to add an “average rating” field to the Products table and update this value any time a new rating is given for the product using an aggregate function
+
 ### Intructions
 #### Don't delete this
 1. Pick one project type
