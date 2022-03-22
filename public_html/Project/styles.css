@@ -16,7 +16,8 @@
 nav li{display: inline; background-color: rebeccapurple;}
 nav li a{color: hotpink}
 
-input{border-radius: 95%;}
+/* input{border-radius: 50%;} */
+input{border-radius: 10px;}
 
 body{
     background-color: hotpink;
