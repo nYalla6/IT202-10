@@ -16,4 +16,10 @@ require(__DIR__ . "/user_helpers.php");
 
 //TODO 4: Flash Message Helpers
 require(__DIR__ . "/flash_messages.php");
+
+//duplicate email/username
+require(__DIR__ . "/duplicate_user_details.php");
+//reset session
+require(__DIR__ . "/reset_session.php");
+
 ?>
