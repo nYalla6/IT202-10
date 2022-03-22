@@ -11,17 +11,37 @@
 }
 
 .alert-info {
-    background-color: rgb(234, 148, 255);
+    background-color: rgb(229, 187, 240);
 }
-nav li{display: inline; background-color: rebeccapurple;}
-nav li a{color: hotpink}
+
+nav li{
+    display: inline; 
+    color: rgb(72, 147, 209); 
+    box-shadow: 3px 3px; 
+    padding-right: 10px;
+}
+nav li a{color: rgb(40, 41, 63)}
+
+div {
+    padding-bottom: 10px;
+    
+}
+
+label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 75px;
+    text-align: left;
+}
+
 
 /* input{border-radius: 50%;} */
-input{border-radius: 10px;}
+input{border-radius: 5px;}
 
 body{
-    background-color: hotpink;
-    color: rgb(153, 0, 153);
+    background-color: rgb(210, 231, 248);
+    color: rgb(40, 41, 63);
 
 }
  
