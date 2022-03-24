@@ -38,7 +38,10 @@
             canvas = document.getElementById("board");
             if (canvas.getContext) {
                 context = canvas.getContext("2d");
+                //offset offers a little bit of padding
                 let offset = canvas.width*.05;
+                
+                //makeRect is a class
                 leftPaddle = makeRect(offset, canvas.height / 2 - paddleHeight / 2, paddleWidth, paddleHeight, paddleSpeed, '#BC0000');
                 rightPaddle = makeRect(canvas.width - paddleWidth - offset, canvas.height / 2 - paddleHeight / 2, paddleWidth, paddleHeight, paddleSpeed, '#0000BC');
                 ball = makeRect(0, 0, ballSize, ballSize, ballSpeed, '#000000');
@@ -54,6 +57,8 @@
         }
         function resetBall() {
             ball.x = canvas.width / 2 - ball.w / 2;
+
+            //Maybe randomize the starting y position 
             ball.y = canvas.height / 2 - ball.w / 2;
             // Modify the ball object to have two speed properties, one for X and one for Y
             ball.sX = ballSpeed;
