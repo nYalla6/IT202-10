@@ -137,6 +137,7 @@
             context.fillText('Click to Start', canvas.width / 2, canvas.height / 2);
             context.font = '18px Arial'
             context.fillText('Use the arrow keys to move', canvas.width / 2, (canvas.height / 4) * 3);
+            context.fillText('Green is +1, Purple is -2, and Golden is +4 speed', canvas.width / 2, (4*canvas.height / 5));
             // Start the game on a click
             canvas.addEventListener('click', startGame);
         }
@@ -291,7 +292,7 @@
                 if (isWithin(snitchX, x, x + sideLength) || isWithin(snitchX + snitchLength, x, x + sideLength)) {// X
                     if (isWithin(snitchY, y, y + sideLength) || isWithin(snitchX + snitchLength, y, y + sideLength)) {// Y
                         // Increase the movement speed by 3
-                        speed += 3;
+                        speed += 4;
 
                         //set spawn to false so you can only grab it once
                         spawn = false;
