@@ -69,6 +69,11 @@
         var targetY = 0;
         var targetLength = 25;
 
+        //Properties for the enemy square
+        var enemyX = 0;
+        var enemyY = 0;
+        var enemyLength = 25;
+
         // Determine if number a is within the range b to c (exclusive)
         function isWithin(a, b, c) {
         return (a > b && a < c);
@@ -142,6 +147,7 @@
             canvas.focus();
             // Put the target at a random starting point
             moveTarget();
+            moveEnemy();
             // Kick off the draw loop
             draw();
 
@@ -176,6 +182,21 @@
             targetY = Math.round((Math.random() * canvas.height) - targetLength)
             if (targetY < targetLength) {
                 targetY += targetLength;
+            }
+            
+        }
+
+        // Move the enemy square to a random position
+        function moveEnemy() {
+            enemyX = Math.round((Math.random() * canvas.width) - enemyLength);
+
+            //trying to keep the x within the bounds
+            if (enemyX < enemyLength){
+                enemyX += enemyLength;
+            }
+            enemyY = Math.round((Math.random() * canvas.height) - enemyLength)
+            if (enemyY < enemyLength) {
+                enemyY += enemyLength;
             }
             
         }
@@ -220,8 +241,20 @@
                 if (isWithin(targetY, y, y + sideLength) || isWithin(targetY + targetLength, y, y + sideLength)) { // Y
                     // Respawn the target
                     moveTarget();
-                        // Increase the score
+                    moveEnemy();
+                    // Increase the score
                     score++;
+                }
+            
+            }
+
+            // Collide with the enemy
+            if (isWithin(enemyX, x, x + sideLength) || isWithin(enemyX + enemyLength, x, x + sideLength)) { // X
+                if (isWithin(enemyY, y, y + sideLength) || isWithin(enemyY + enemyLength, y, y + sideLength)) { // Y
+                    // Respawn the target
+                    moveEnemy();
+                    // Decrease the score by 2
+                    score -= 2;
                 }
             
             }
@@ -231,6 +264,11 @@
             // Draw the target 
             context.fillStyle = '#00FF00';
             context.fillRect(targetX, targetY, targetLength, targetLength);
+
+            //Draw the enemy
+            context.fillStyle = '#F000F0';
+            context.fillRect(enemyX, enemyY, enemyLength, enemyLength);
+
             // Draw the score and time remaining
             context.fillStyle = '#000000';
             context.font = '24px Arial';
