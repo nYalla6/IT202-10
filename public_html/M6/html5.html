@@ -35,9 +35,11 @@
     <div id="center">
         <canvas id="canvas" width="600" height="400" tabindex="1">
         </canvas>
+        <br>
+        <span id="endGame"></span>
     </div>
 
-    <span id="endGame"></span>
+    
 
     <script>
         // Collect The Square game
@@ -131,7 +133,7 @@
 
         // Start the game
         function startGame() {
-            // Reduce the countdown timer ever second
+            // Reduce the countdown timer every second
             id = setInterval(function() {
                 countdown--;
             }, 1000)
@@ -157,10 +159,8 @@
             context.textAlign = 'center';
             context.fillText('Final Score: ' + score, canvas.width / 2, canvas.height / 2);
 
-            context.font = '24 px Arial';
-            context.fillText('Click to Play Again!', canvas.width / 2, 2*canvas.height / 3);
-
-            canvas.addEventListener('click', startGame);
+            let eg = document.getElementById("endGame");
+            eg.innerHTML = "<button onclick='location.reload();'> Click to Play Again </button>";
 
         }
 
