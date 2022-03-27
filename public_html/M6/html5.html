@@ -159,6 +159,7 @@
             context.textAlign = 'center';
             context.fillText('Final Score: ' + score, canvas.width / 2, canvas.height / 2);
 
+            //add a play again option 
             let eg = document.getElementById("endGame");
             eg.innerHTML = "<button onclick='location.reload();'> Click to Play Again </button>";
 
@@ -166,8 +167,17 @@
 
         // Move the target square to a random position
         function moveTarget() {
-        targetX = Math.round(Math.random() * canvas.width - targetLength);
-        targetY = Math.round(Math.random() * canvas.height - targetLength)
+            targetX = Math.round((Math.random() * canvas.width) - targetLength);
+
+            //trying to keep the x within the bounds
+            if (targetX < targetLength){
+                targetX += targetLength;
+            }
+            targetY = Math.round((Math.random() * canvas.height) - targetLength)
+            if (targetY < targetLength) {
+                targetY += targetLength;
+            }
+            
         }
 
         // Clear the canvas
