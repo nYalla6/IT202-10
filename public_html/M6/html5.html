@@ -1,0 +1,345 @@
+<html>
+
+<head>
+    <style>
+        #center {
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            align-content: center;
+            text-align: center;
+
+            height: 99%;
+            padding: 0px;
+        }
+
+        canvas,
+        body {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        canvas:focus{
+            border: 3px solid black;
+        }
+        canvas:not(:focus){
+            border: 1px dotted black;
+        }
+    
+    </style>
+</head>
+
+<body>
+    <h1>Eat the Square</h1>
+    <!-- <h3><a href="index.html">Back</a></h3> -->
+    <div id="center">
+        <canvas id="canvas" width="600" height="400" tabindex="1">
+        </canvas>
+        <br>
+        <span id="endGame"></span>
+    </div>
+
+    
+
+    <script>
+        // Collect The Square game
+
+        // Get a reference to the canvas DOM element
+        var canvas = document.getElementById('canvas');
+        // Get the canvas drawing context
+        var context = canvas.getContext('2d');
+
+        // Your score
+        var score = 0;
+
+        // Properties for your square
+        var x = 50; // X position
+        var y = 100; // Y position
+        var speed = 6; // Distance to move each frame
+        var sideLength = 50; // Length of each side of the square
+
+        // FLags to track which keys are pressed
+        var down = false;
+        var up = false;
+        var right = false;
+        var left = false;
+
+        // Properties for the target square
+        var targetX = 0;
+        var targetY = 0;
+        var targetLength = 25;
+
+        //Properties for the enemy square
+        var enemyX = 0;
+        var enemyY = 0;
+        var enemyLength = 25;
+
+        //propertiese for the golden snitch
+        var snitchX = 0;
+        var snitchY = 0;
+        var snitchLength = 10;
+        var spawn = true;
+
+        // Determine if number a is within the range b to c (exclusive)
+        function isWithin(a, b, c) {
+        return (a > b && a < c);
+        }
+
+        // Countdown timer (in seconds)
+        var countdown = 30;
+        // ID to track the setTimeout
+        var id = null;
+
+        // Listen for keydown events
+        canvas.addEventListener('keydown', function(event) {
+        event.preventDefault();
+        console.log(event.key, event.keyCode);
+        if (event.keyCode === 40) { // DOWN
+            down = true;
+        }
+        if (event.keyCode === 38) { // UP
+            up = true;
+        }
+        if (event.keyCode === 37) { // LEFT
+            left = true;
+        }
+        if (event.keyCode === 39) { // RIGHT
+            right = true;
+        }
+        });
+
+        // Listen for keyup events
+        canvas.addEventListener('keyup', function(event) {
+        event.preventDefault();
+        console.log(event.key, event.keyCode);
+        if (event.keyCode === 40) { // DOWN
+            down = false;
+        }
+        if (event.keyCode === 38) { // UP
+            up = false;
+        }
+        if (event.keyCode === 37) { // LEFT
+            left = false;
+        }
+        if (event.keyCode === 39) { // RIGHT
+            right = false;
+        }
+        });
+
+        // Show the start menu
+        function menu() {
+            erase();
+            context.fillStyle = '#000000';
+            context.font = '36px Arial';
+            context.textAlign = 'center';
+            context.fillText('Collect the Square!', canvas.width / 2, canvas.height / 4);
+            context.font = '24px Arial';
+            context.fillText('Click to Start', canvas.width / 2, canvas.height / 2);
+            context.font = '18px Arial'
+            context.fillText('Use the arrow keys to move', canvas.width / 2, (canvas.height / 4) * 3);
+            context.fillText('Green is +1, Purple is -2, and Golden is +4 speed', canvas.width / 2, (4*canvas.height / 5));
+            // Start the game on a click
+            canvas.addEventListener('click', startGame);
+        }
+
+
+        // Start the game
+        function startGame() {
+            // Reduce the countdown timer every second
+            id = setInterval(function() {
+                countdown--;
+            }, 1000)
+            // Stop listening for click events
+            canvas.removeEventListener('click', startGame);
+            canvas.focus();
+            // Put the target at a random starting point
+            moveTarget();
+            moveEnemy();
+            spawn = true;
+            // Kick off the draw loop
+            draw();
+
+            
+        }
+
+        // Show the game over screen
+        function endGame() {
+            // Stop the countdown
+            clearInterval(id);
+            // Display the final score
+            erase();
+            context.fillStyle = '#000000';
+            context.font = '24px Arial';
+            context.textAlign = 'center';
+            context.fillText('Final Score: ' + score, canvas.width / 2, canvas.height / 2);
+
+            //add a play again option 
+            let eg = document.getElementById("endGame");
+            eg.innerHTML = "<button onclick='location.reload();'> Click to Play Again </button>";
+
+        }
+
+        // Move the target square to a random position
+        function moveTarget() {
+            targetX = Math.round((Math.random() * canvas.width) - targetLength);
+
+            //trying to keep the x within the bounds
+            if (targetX < targetLength){
+                targetX += targetLength;
+            }
+            targetY = Math.round((Math.random() * canvas.height) - targetLength)
+            if (targetY < targetLength) {
+                targetY += targetLength;
+            }
+            
+        }
+
+        // Move the enemy square to a random position
+        function moveEnemy() {
+            enemyX = Math.round((Math.random() * canvas.width) - enemyLength);
+
+            //trying to keep the x within the bounds
+            if (enemyX < enemyLength){
+                enemyX += enemyLength;
+            }
+            enemyY = Math.round((Math.random() * canvas.height) - enemyLength)
+            if (enemyY < enemyLength) {
+                enemyY += enemyLength;
+            }
+            
+        }
+
+        // Move the golden snitch to a random position
+        function moveSnitch() {
+            snitchX = Math.round((Math.random() * canvas.width) - snitchLength);
+
+            //trying to keep the x within the bounds
+            if (snitchX < snitchLength){
+                snitchX += snitchLength;
+            }
+            snitchY = Math.round((Math.random() * canvas.height) - snitchLength)
+            if (snitchY < snitchLength) {
+                snitchY += snitchLength;
+            }
+            
+        }
+
+        // Clear the canvas
+        function erase() {
+        context.fillStyle = '#FFFFFF';
+        context.fillRect(0, 0, 600, 400);
+        }
+
+        // The main draw loop
+        function draw() {
+            erase();
+            // Move the square
+            if (down) {
+                y += speed;
+            }
+            if (up) {
+                y -= speed;
+            }
+            if (right) {
+                x += speed;
+            }
+            if (left) {
+                x -= speed;
+            }
+            // Keep the square within the bounds
+            if (y + sideLength > canvas.height) {
+                y = canvas.height - sideLength;
+            }
+            if (y < 0) {
+                y = 0;
+            }
+            if (x < 0) {
+                x = 0;
+            }
+            if (x + sideLength > canvas.width) {
+                x = canvas.width - sideLength;
+            }
+            // Collide with the target
+            if (isWithin(targetX, x, x + sideLength) || isWithin(targetX + targetLength, x, x + sideLength)) { // X
+                if (isWithin(targetY, y, y + sideLength) || isWithin(targetY + targetLength, y, y + sideLength)) { // Y
+                    // Respawn the target
+                    moveTarget();
+                    moveEnemy();
+                    if(spawn) {moveSnitch();}
+                    
+                    
+                    // Increase the score
+                    score++;
+                }
+            
+            }
+
+            // Collide with the enemy
+            if (isWithin(enemyX, x, x + sideLength) || isWithin(enemyX + enemyLength, x, x + sideLength)) { // X
+                if (isWithin(enemyY, y, y + sideLength) || isWithin(enemyY + enemyLength, y, y + sideLength)) { // Y
+                    // Respawn the target
+                    moveEnemy();
+                    if(spawn) {moveSnitch();}
+                    // Decrease the score by 2
+                    score -= 2;
+                }
+            
+            }
+
+
+            // Collide with the golden snitch
+            if (spawn) {
+                if (isWithin(snitchX, x, x + sideLength) || isWithin(snitchX + snitchLength, x, x + sideLength)) {// X
+                    if (isWithin(snitchY, y, y + sideLength) || isWithin(snitchX + snitchLength, y, y + sideLength)) {// Y
+                        // Increase the movement speed by 3
+                        speed += 4;
+
+                        //set spawn to false so you can only grab it once
+                        spawn = false;
+                    }
+                
+                }
+            }
+            // Draw the square
+            context.fillStyle = '#FF0000';
+            context.fillRect(x, y, sideLength, sideLength);
+            
+            // Draw the target 
+            context.fillStyle = '#00FF00';
+            context.fillRect(targetX, targetY, targetLength, targetLength);
+
+            //Draw the enemy
+            context.fillStyle = '#F000F0';
+            context.fillRect(enemyX, enemyY, enemyLength, enemyLength);
+
+            //If the time is less than 10, then spawn golden snitch
+
+            if (spawn && countdown < 11) {
+                context.fillStyle = '#FFD700';
+                context.fillRect(snitchX, snitchY, snitchLength, snitchLength);
+            }
+
+            // Draw the score and time remaining
+            context.fillStyle = '#000000';
+            context.font = '24px Arial';
+            context.textAlign = 'left';
+            context.fillText('Score: ' + score, 10, 24);
+            context.fillText('Time Remaining: ' + countdown, 10, 50);
+
+            // End the game or keep playing
+            if (countdown <= 0) {
+                endGame();
+            } else {
+                window.requestAnimationFrame(draw);
+            }
+            
+        }
+
+        // Start the game
+        menu();
+        canvas.focus();
+
+    </script>
+</body>
+
+</html>
