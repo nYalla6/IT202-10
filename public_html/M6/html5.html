@@ -74,6 +74,12 @@
         var enemyY = 0;
         var enemyLength = 25;
 
+        //propertiese for the golden snitch
+        var snitchX = 0;
+        var snitchY = 0;
+        var snitchLength = 10;
+        var spawn = true;
+
         // Determine if number a is within the range b to c (exclusive)
         function isWithin(a, b, c) {
         return (a > b && a < c);
@@ -148,6 +154,7 @@
             // Put the target at a random starting point
             moveTarget();
             moveEnemy();
+            spawn = true;
             // Kick off the draw loop
             draw();
 
@@ -201,6 +208,21 @@
             
         }
 
+        // Move the golden snitch to a random position
+        function moveSnitch() {
+            snitchX = Math.round((Math.random() * canvas.width) - snitchLength);
+
+            //trying to keep the x within the bounds
+            if (snitchX < snitchLength){
+                snitchX += snitchLength;
+            }
+            snitchY = Math.round((Math.random() * canvas.height) - snitchLength)
+            if (snitchY < snitchLength) {
+                snitchY += snitchLength;
+            }
+            
+        }
+
         // Clear the canvas
         function erase() {
         context.fillStyle = '#FFFFFF';
@@ -242,6 +264,9 @@
                     // Respawn the target
                     moveTarget();
                     moveEnemy();
+                    if(spawn) {moveSnitch();}
+                    
+                    
                     // Increase the score
                     score++;
                 }
@@ -253,14 +278,31 @@
                 if (isWithin(enemyY, y, y + sideLength) || isWithin(enemyY + enemyLength, y, y + sideLength)) { // Y
                     // Respawn the target
                     moveEnemy();
+                    if(spawn) {moveSnitch();}
                     // Decrease the score by 2
                     score -= 2;
                 }
             
             }
+
+
+            // Collide with the golden snitch
+            if (spawn) {
+                if (isWithin(snitchX, x, x + sideLength) || isWithin(snitchX + snitchLength, x, x + sideLength)) {// X
+                    if (isWithin(snitchY, y, y + sideLength) || isWithin(snitchX + snitchLength, y, y + sideLength)) {// Y
+                        // Increase the movement speed by 3
+                        speed += 3;
+
+                        //set spawn to false so you can only grab it once
+                        spawn = false;
+                    }
+                
+                }
+            }
             // Draw the square
             context.fillStyle = '#FF0000';
             context.fillRect(x, y, sideLength, sideLength);
+            
             // Draw the target 
             context.fillStyle = '#00FF00';
             context.fillRect(targetX, targetY, targetLength, targetLength);
@@ -269,12 +311,20 @@
             context.fillStyle = '#F000F0';
             context.fillRect(enemyX, enemyY, enemyLength, enemyLength);
 
+            //If the time is less than 10, then spawn golden snitch
+
+            if (spawn && countdown < 11) {
+                context.fillStyle = '#FFD700';
+                context.fillRect(snitchX, snitchY, snitchLength, snitchLength);
+            }
+
             // Draw the score and time remaining
             context.fillStyle = '#000000';
             context.font = '24px Arial';
             context.textAlign = 'left';
             context.fillText('Score: ' + score, 10, 24);
             context.fillText('Time Remaining: ' + countdown, 10, 50);
+
             // End the game or keep playing
             if (countdown <= 0) {
                 endGame();
