@@ -1,5 +1,5 @@
 .alert-success {
-    background-color: green
+    background-color: rgb(95, 255, 95)
 }
 
 .alert-warning {
@@ -17,8 +17,9 @@
 nav li{
     display: inline; 
     color: rgb(72, 147, 209); 
-    box-shadow: 3px 3px; 
+    box-shadow: 3px 2px; 
     padding-right: 10px;
+    border-radius: 5px;
 }
 nav li a{color: rgb(40, 41, 63)}
 
@@ -40,7 +41,7 @@ label{
 input{border-radius: 5px;}
 
 body{
-    background-color: rgb(210, 231, 248);
+    background-color: rgb(164, 237, 250);
     color: rgb(40, 41, 63);
 
 }
