@@ -18,7 +18,7 @@ nav li{
     display: inline; 
     color: rgb(72, 147, 209); 
     box-shadow: 3px 2px; 
-    padding-right: 10px;
+    padding-right: 2%;
     border-radius: 5px;
 }
 nav li a{color: rgb(40, 41, 63)}
