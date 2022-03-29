@@ -8,6 +8,8 @@ $BASE_PATH = '/Project';
 //TODO 4: Flash Message Helpers - moved so we don't get an exception
 require(__DIR__ . "/flash_messages.php");
 
+require(__DIR__ . "/get_url.php");
+
 //require safer_echo.php
 require(__DIR__ . "/safer_echo.php");
 
@@ -21,5 +23,8 @@ require(__DIR__ . "/user_helpers.php");
 require(__DIR__ . "/duplicate_user_details.php");
 //reset session
 require(__DIR__ . "/reset_session.php");
+
+
+
 
 ?>
