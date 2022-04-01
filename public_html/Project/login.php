@@ -14,14 +14,28 @@ require(__DIR__ . "/../../partials/nav.php");
 </form>
 <script>
     function validate(form) {
-        //TODO 1: implement JavaScript validation
-        //ensure it returns false for an error and true for success
+        let pw = form.password.value;
+        let un = form.email.value;
+        let isValid = true;
+        //TODO add other client side validation....
 
-        //TODO update clientside validation to check if it should
-        //valid email or username
-        return true;
+        //example of using flash via javascript
+        //find the flash container, create a new element, appendChild
+
+        //check if has '@' -- do email regex confirmation
+        var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        if (un.includes("@")) {
+            if (!(validRegex.test(un)))
+            {
+                flash("Email format incorrect", "warning");
+                isValid = false;
+            }
+            
+        }
+        return isValid;
     }
 </script>
+
 <?php
 //TODO 2: add PHP Code
 if (isset($_POST["email"]) && isset($_POST["password"])) {
@@ -65,7 +79,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
         //flash("Welcome, $email");
         //TODO 4
         $db = getDB();
-        $stmt = $db->prepare("SELECT id, email, username, password from Users 
+        $stmt = $db->prepare("SELECT id, email, username, password from Users
         where email = :email or username = :email");
         try {
             $r = $stmt->execute([":email" => $email]);
