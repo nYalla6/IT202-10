@@ -21,6 +21,10 @@ nav li{
     padding-right: 2%;
     border-radius: 5px;
 }
+
+nav li:hover{
+    box-shadow: none; 
+}
 nav li a{color: rgb(40, 41, 63)}
 
 div {
