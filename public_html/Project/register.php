@@ -1,5 +1,6 @@
 <?php
 require(__DIR__ . "/../../partials/nav.php");
+reset_session();
 ?>
 <form onsubmit="return validate(this)" method="POST">
     <div>
@@ -30,49 +31,44 @@ require(__DIR__ . "/../../partials/nav.php");
 </script>
 <?php
 //TODO 2: add PHP Code
-if (isset($_POST["email"]) && isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["confirm"])) {
+if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm"]) && isset($_POST["username"])) {
     $email = se($_POST, "email", "", false);
-    $username = se($_POST, "username", "", false);
     $password = se($_POST, "password", "", false);
-    $confirm = se(
-        $_POST,
-        "confirm",
-        "",
-        false
-    );
+    $confirm = se($_POST, "confirm", "", false);
+    $username = se($_POST, "username", "", false);
     //TODO 3
     $hasError = false;
     if (empty($email)) {
-        flash("Email must not be empty");
+        flash("Email must not be empty", "danger");
         $hasError = true;
     }
     //sanitize
     $email = sanitize_email($email);
     //validate
     if (!is_valid_email($email)) {
-        flash("Invalid email address");
+        flash("Invalid email address", "danger");
         $hasError = true;
     }
-    if (!preg_match('/^[a-z0-9_-]{3,16}$/i', $username)) {
-        flash("Username must only be alphanumeric and can only contain - or _", "danger");
+    if (!is_valid_username($username)) {
+        flash("Username must only contain 3-16 characters a-z, 0-9, _, or -", "danger");
         $hasError = true;
     }
     if (empty($password)) {
-        flash("password must not be empty");
+        flash("password must not be empty", "danger");
         $hasError = true;
     }
     if (empty($confirm)) {
-        flash("Confirm password must not be empty");
+        flash("Confirm password must not be empty", "danger");
         $hasError = true;
     }
-    if (strlen($password) < 8) {
-        flash("Password too short");
+    if (!is_valid_password($password)) {
+        flash("Password too short", "danger");
         $hasError = true;
     }
     if (
         strlen($password) > 0 && $password !== $confirm
     ) {
-        flash("Passwords must match");
+        flash("Passwords must match", "danger");
         $hasError = true;
     }
     if (!$hasError) {
@@ -82,10 +78,9 @@ if (isset($_POST["email"]) && isset($_POST["username"]) && isset($_POST["passwor
         $stmt = $db->prepare("INSERT INTO Users (email, password, username) VALUES(:email, :password, :username)");
         try {
             $stmt->execute([":email" => $email, ":password" => $hash, ":username" => $username]);
-            flash("Successfully registered!");
+            flash("Successfully registered!", "success");
         } catch (Exception $e) {
-            flash("There was a problem registering");
-            flash("<pre>" . var_export($e, true) . "</pre>");
+            users_check_duplicate($e->errorInfo);
         }
     }
 }

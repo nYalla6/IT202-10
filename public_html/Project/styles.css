@@ -1,0 +1,48 @@
+.alert-success {
+    background-color: rgb(95, 255, 95)
+}
+
+.alert-warning {
+    background-color: yellow;
+}
+
+.alert-danger {
+    background-color: red;
+}
+
+.alert-info {
+    background-color: rgb(229, 187, 240);
+}
+
+nav li{
+    display: inline; 
+    color: rgb(72, 147, 209); 
+    box-shadow: 3px 2px; 
+    padding-right: 2%;
+    border-radius: 5px;
+}
+nav li a{color: rgb(40, 41, 63)}
+
+div {
+    padding-bottom: 10px;
+    
+}
+
+label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 125px;
+    text-align: left;
+}
+
+
+/* input{border-radius: 50%;} */
+input{border-radius: 5px;}
+
+body{
+    background-color: rgb(164, 237, 250);
+    color: rgb(40, 41, 63);
+
+}
+ 
