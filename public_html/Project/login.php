@@ -32,6 +32,14 @@ require(__DIR__ . "/../../partials/nav.php");
             }
             
         }
+        else {
+            validRegex = /[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+/;
+            if (!validRegex.test(un)){
+                flash("Invalid username format", "warning")
+                isValid = false;
+            }
+        }
+        
         return isValid;
     }
 </script>
