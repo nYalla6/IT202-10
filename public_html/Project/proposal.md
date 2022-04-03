@@ -18,7 +18,7 @@
  
 ### Proposal Checklist and Evidence
 
-- Milestone 1
+- [Milestone 1]()
     - [X] \(02/22/2022) User will be able to register a new account
       - Form Fields
         - Username, email, password, confirm password(other fields optional)
