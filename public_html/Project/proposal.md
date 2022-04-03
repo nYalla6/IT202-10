@@ -19,7 +19,7 @@
 ### Proposal Checklist and Evidence
 
 - Milestone 1
-    - [X] \(02/13/2022) User will be able to register a new account
+    - [X] \(02/22/2022) User will be able to register a new account
       - Form Fields
         - Username, email, password, confirm password(other fields optional)
         - Email is required and must be validated
@@ -33,7 +33,7 @@
       - System should let user know if username or email is taken and allow the user to correct the error without wiping/clearing the form
         -  The only fields that may be cleared are the password fields
 
-    - [X] \(02/14/2022) User will be able to login to their account (given they enter the correct credentials)
+    - [X] \(02/24/2022) User will be able to login to their account (given they enter the correct credentials)
       * Form
           * User can login with **email **or **username**
               * This can be done as a single field or as two separate fields
@@ -44,33 +44,33 @@
         * This is a protected page (non-logged in users shouldn’t have access)
         * This can be home, profile, a dashboard, etc
         
-    - [X] \(mm/dd/yyyy of completion) User will be able to logout
+    - [X] \(02/24/2022) User will be able to logout
       * Logging out will redirect to login page
       * User should see a message that they’ve successfully logged out
       * Session should be destroyed (so the back button doesn’t allow them access back in)
        
-    - [X] \(mm/dd/yyyy of completion) Basic security rules implemented
+    - [X] \(03/30/2022) Basic security rules implemented
       * Authentication:
           * Function to check if user is logged in
           * Function should be called on appropriate pages that only allow logged in users
       * Roles/Authorization:
           * Have a roles table (see below)
           
-    - [ ] \(mm/dd/yyyy of completion) Basic Roles implemented
+    - [X] \(03/29/2022) Basic Roles implemented
       * Have a <span style="text-decoration:underline;">Roles</span> table	(id, name, description, is_active, modified, created)
       * Have a <span style="text-decoration:underline;">User Roles</span> table (id, user_id, role_id, is_active, created, modified)
       * Include a function to check if a user has a specific role (we won’t use it for this milestone but it should be usable in the future)
     
-    - [ ] \(mm/dd/yyyy of completion) Site should have basic styles/theme applied; everything should be styled
+    - [X] \(03/29/2022) Site should have basic styles/theme applied; everything should be styled
       * I.e., forms/input, navigation bar, etc
       
-    * [ ] \(mm/dd/yyyy of completion) Any output messages/errors should be “user friendly”
+    * [X] \(03/02/2022) Any output messages/errors should be “user friendly”
       * Any technical errors or debug output displayed will result in a loss of points
       
-    * [ ] \(mm/dd/yyyy of completion) User will be able to see their profile
+    * [X] \(03/03/2022) User will be able to see their profile
       * Email, username, etc
       
-    * [ ] \(mm/dd/yyyy of completion) User will be able to edit their profile
+    * [X] \(03/03/2022) User will be able to edit their profile
       * Changing username/email should properly check to see if it’s available before allowing the change
       * Any other fields should be properly validated
       * Allow password reset (only if the existing correct password is provided)
