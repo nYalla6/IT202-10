@@ -122,7 +122,7 @@
   
   * [ ] \(mm/dd/yyyy of completion) User will be able to remove a single item from their cart via button click
   
-  * [ ] \(mm/dd/yyyy of completion) User will be able t o clear their entire cart via a button click
+  * [ ] \(mm/dd/yyyy of completion) User will be able to clear their entire cart via a button click
  
 - Milestone 3
   * [ ] \(mm/dd/yyyy of completion) User will be able to purchase items in their Cart
