@@ -8,12 +8,15 @@ if (!has_role("Admin")) {
 }
 
 if (isset($_POST["name"]) && isset($_POST["description"]) && isset($_POST["category"]) && isset($_POST["stock"]) && isset($_POST["unit_price"]) && isset($_POST["visibility"])) {
+    flash("Pre safer echo", "info");
     $name = se($_POST, "name", "", false);
     $desc = se($_POST, "description", "", false);
     $category = se($_POST, "category", "", false);
     $stock = se($_POST, "stock", 0, false);
     $price = se($_POST, "unit_price", "", false);
     $vis = se($_POST, "visibility", 1, false);
+
+    flash("Post is working", "info");
 
     if (empty($name)) {
         flash("Name is required", "warning");
@@ -68,12 +71,10 @@ if (isset($_POST["name"]) && isset($_POST["description"]) && isset($_POST["categ
     <!-- Visibility -->
     <div>
         <label for="vis">Visibility</label>
-        <form>
-            <input name="visiblity" id="vis_true" type="radio" value="1"></input>
-            <label for="vis_true">True</label>
-            <input name="visiblity" id="vis_false" type="radio" value="0"></input>
-            <label for="vis_false">False</label><br>
-        </form>
+        <input name="visiblity" id="vis_true" type="radio" value="1"></input>
+        <label for="vis_true">True</label>
+        <input name="visiblity" id="vis_false" type="radio" value="0"></input>
+        <label for="vis_false">False</label><br>
     </div>
     <input type="submit" value="Create Product"/>
 </form>
