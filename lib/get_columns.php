@@ -1,5 +1,4 @@
 <?php
-
 function get_columns($table)
 {
     $table = se($table, null, null, false);
