@@ -7,7 +7,7 @@ if (!has_role("Admin")) {
     die(header("Location: " . get_url("home.php")));
 }
 
-if (isset($_POST["name"]) && isset($_POST["description"])) {
+if (isset($_POST["name"]) && isset($_POST["description"]) && isset($_POST["category"]) && isset($_POST["stock"]) && isset($_POST["unit_price"]) && isset($_POST["visibility"])) {
     $name = se($_POST, "name", "", false);
     $desc = se($_POST, "description", "", false);
     $category = se($_POST, "category", "", false);
@@ -70,7 +70,7 @@ if (isset($_POST["name"]) && isset($_POST["description"])) {
         <label for="vis">Visibility</label>
         <form>
             <input name="visiblity" id="vis_true" type="radio" value="1"></input>
-            <label for="vis_true">True</label><br>
+            <label for="vis_true">True</label>
             <input name="visiblity" id="vis_false" type="radio" value="0"></input>
             <label for="vis_false">False</label><br>
         </form>
