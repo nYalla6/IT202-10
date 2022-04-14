@@ -75,8 +75,7 @@ if (isset($_POST["name"]) && isset($_POST["description"]) && isset($_POST["categ
             <label for="vis_false">False</label><br>
         </form>
     </div>
-
-    <input type="submit" value="Create Product" />
+    <input type="submit" value="Create Product"/>
 </form>
 
 <?php
