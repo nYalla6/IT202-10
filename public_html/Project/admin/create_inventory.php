@@ -67,11 +67,13 @@ if (isset($_POST["name"]) && isset($_POST["description"])) {
 
     <!-- Visibility -->
     <div>
-        <label for="vis">Description</label>
-        <select name="visiblity" id="vis" size="2">
-            <option value="1">True</option>
-            <option value="0">False</option>
-        </select>
+        <label for="vis">Visibility</label>
+        <form>
+            <input name="visiblity" id="vis_true" type="radio" value="1"></input>
+            <label for="vis_true">True</label><br>
+            <input name="visiblity" id="vis_false" type="radio" value="0"></input>
+            <label for="vis_false">False</label><br>
+        </form>
     </div>
 
     <input type="submit" value="Create Product" />
