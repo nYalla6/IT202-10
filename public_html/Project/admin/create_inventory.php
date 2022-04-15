@@ -71,9 +71,9 @@ if (isset($_POST["name"]) && isset($_POST["description"]) && isset($_POST["categ
     <!-- Visibility -->
     <div>
         <label for="vis">Visibility</label>
-        <input name="visiblity" id="vis_true" type="radio" value="1"></input>
+        <input name="visibility" id="vis_true" type="radio" value="1"></input>
         <label for="vis_true">True</label>
-        <input name="visiblity" id="vis_false" type="radio" value="0"></input>
+        <input name="visibility" id="vis_false" type="radio" value="0"></input>
         <label for="vis_false">False</label><br>
     </div>
     <input type="submit" value="Create Product"/>
