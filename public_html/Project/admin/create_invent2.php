@@ -3,7 +3,7 @@
 require(__DIR__ . "/../../../partials/nav.php");
 
 $TABLE_NAME = "Products";
-if (!has_role("Admin")) {
+if (!has_role("Admin") && !has_role("shop_owner")) {
     flash("You don't have permission to view this page", "warning");
     die(header("Location: $BASE_PATH/home.php"));
 }

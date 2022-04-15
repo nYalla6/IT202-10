@@ -7,7 +7,7 @@ if (!has_role("Admin")) {
     die(header("Location: " . get_url("home.php")));
 }
 
-if (isset($_POST["name"]) && isset($_POST["description"]) && isset($_POST["category"]) && isset($_POST["stock"]) && isset($_POST["unit_price"]) && isset($_POST["visibility"])) {
+if (isset($_POST["name"]) && isset($_POST["description"]) && isset($_POST["category"]) && isset($_POST["stock"]) && isset($_POST["unit_price"]) && isset($_POST["visibility"]) && isset($_POST["submit"])) {
     flash("Pre safer echo", "info");
     $name = se($_POST, "name", "", false);
     $desc = se($_POST, "description", "", false);
