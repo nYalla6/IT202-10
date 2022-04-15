@@ -78,7 +78,7 @@
     
 
 - Milestone 2
-  * [ ] \(mm/dd/yyyy of completion) User with an admin role or shop owner role will be able to add products to inventory
+  * [X] \(04/15/2022) User with an admin role or shop owner role will be able to add products to inventory
     * Table should be called <span style="text-decoration:underline;">Products</span> (id, name, description, category, stock, created, modified, unit_price, visibility [true, false])
     
     

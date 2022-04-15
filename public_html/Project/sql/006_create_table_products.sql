@@ -22,3 +22,4 @@ CREATE TABLE IF NOT EXISTS `Products` (
     check (stock >= 0), -- don't allow negative stock; I don't allow backorders
     check (unit_price >= 0) 
 );
+
