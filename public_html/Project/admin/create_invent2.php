@@ -1,6 +1,7 @@
 <?php
 //note we need to go up 1 more directory
 require(__DIR__ . "/../../../partials/nav.php");
+
 $TABLE_NAME = "Products";
 if (!has_role("Admin")) {
     flash("You don't have permission to view this page", "warning");
@@ -23,7 +24,7 @@ $ignore = ["id", "modified", "created"];
         <?php foreach ($columns as $index => $column) : ?>
             <?php /* Lazily ignoring fields via hardcoded array*/ ?>
             <?php if (!in_array($column["Field"], $ignore)) : ?>
-                <div class="mb-4">
+                <div class="mb-3">
                     <label class="form-label" for="<?php se($column, "Field"); ?>"><?php se($column, "Field"); ?></label>
                     <input class="form-control" id="<?php se($column, "Field"); ?>" type="<?php echo input_map(se($column, "Type", "", false)); ?>" name="<?php se($column, "Field"); ?>" />
                 </div>
@@ -34,4 +35,3 @@ $ignore = ["id", "modified", "created"];
 </div>
 <?php
 //note we need to go up 1 more directory
-require_once(__DIR__ . "/../../../partials/footer.php");
