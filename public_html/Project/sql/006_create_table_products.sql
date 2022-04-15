@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS `Category` (
     PRIMARY KEY (`category_name`)
 );
 
+INSERT INTO Category(`category_name`) VALUES('General'); 
 CREATE TABLE IF NOT EXISTS `Products` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(100) NOT NULL UNIQUE,
@@ -20,4 +21,3 @@ CREATE TABLE IF NOT EXISTS `Products` (
     UNIQUE (`name`)
 );
 
-INSERT INTO Category(`category_name`) VALUES('General'); 
