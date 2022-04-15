@@ -2,6 +2,7 @@
 //note we need to go up 1 more directory
 require(__DIR__ . "/../../../partials/nav.php");
 $TABLE_NAME = "Products";
+
 if ((!has_role("Admin")) && !has_role("shop_owner")) {
     flash("You don't have permission to view this page", "warning");
     die(header("Location: $BASE_PATH/home.php"));
@@ -14,7 +15,7 @@ if (isset($_POST["submit"])) {
 }
 //get the table definition
 $columns = get_columns($TABLE_NAME);
-//echo "<pre>" . var_export($columns, true) . "</pre>";
+// echo "<pre>" . var_export($columns, true) . "</pre>";
 $ignore = ["id", "modified", "created"];
 ?>
 <div class="container-fluid">
