@@ -3,7 +3,8 @@
 require(__DIR__ . "/../../../partials/nav.php");
 
 $TABLE_NAME = "Products";
-if (!has_role("Admin") && !has_role("shop_owner")) {
+
+if (!(has_role("Admin") && !(has_role("shop_owner")))) {
     flash("You don't have permission to view this page", "warning");
     die(header("Location: $BASE_PATH/home.php"));
 }
@@ -15,7 +16,7 @@ if (isset($_POST["submit"])) {
 }
 //get the table definition
 $columns = get_columns($TABLE_NAME);
-//echo "<pre>" . var_export($columns, true) . "</pre>";
+// echo "<pre>" . var_export($columns, true) . "</pre>";
 $ignore = ["id", "modified", "created"];
 ?>
 <div class="container-fluid">
@@ -24,7 +25,7 @@ $ignore = ["id", "modified", "created"];
         <?php foreach ($columns as $index => $column) : ?>
             <?php /* Lazily ignoring fields via hardcoded array*/ ?>
             <?php if (!in_array($column["Field"], $ignore)) : ?>
-                <div class="mb-3">
+                <div class="mb-4">
                     <label class="form-label" for="<?php se($column, "Field"); ?>"><?php se($column, "Field"); ?></label>
                     <input class="form-control" id="<?php se($column, "Field"); ?>" type="<?php echo input_map(se($column, "Type", "", false)); ?>" name="<?php se($column, "Field"); ?>" />
                 </div>

@@ -3,7 +3,7 @@ require(__DIR__ . "/../../partials/nav.php");
 // since any user can see there will be no validation for login here
 $results = [];
 $db = getDB();
-$stmt = $db->prepare("SELECT id, name, description, category, stock, unit_price FROM Products WHERE stock > 0 LIMIT 50");
+$stmt = $db->prepare("SELECT id, name, description, category, stock, unit_price FROM Products WHERE stock > 0 AND visibility = 1 LIMIT 50");
 try {
     $stmt->execute();
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
