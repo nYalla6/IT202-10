@@ -19,5 +19,7 @@ CREATE TABLE IF NOT EXISTS `Products` (
     PRIMARY KEY (`id`),
     FOREIGN KEY (`category`) REFERENCES Category(`category_name`),
     UNIQUE (`name`)
+    check (stock >= 0), -- don't allow negative stock; I don't allow backorders
+    check (unit_price >= 0) 
 );
 
