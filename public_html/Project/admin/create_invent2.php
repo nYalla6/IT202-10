@@ -1,7 +1,6 @@
 <?php
 //note we need to go up 1 more directory
 require(__DIR__ . "/../../../partials/nav.php");
-
 $TABLE_NAME = "Products";
 
 if ((!has_role("Admin")) && !has_role("shop_owner")) {
@@ -36,3 +35,4 @@ $ignore = ["id", "modified", "created"];
 </div>
 <?php
 //note we need to go up 1 more directory
+require_once(__DIR__ . "/../../../partials/footer.php");

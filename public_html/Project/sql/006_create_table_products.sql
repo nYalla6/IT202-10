@@ -20,3 +20,4 @@ CREATE TABLE IF NOT EXISTS `Products` (
     FOREIGN KEY (`category`) REFERENCES Category(`category_name`),
     UNIQUE (`name`)
 );
+
