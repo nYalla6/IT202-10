@@ -19,6 +19,29 @@ try {
     error_log(var_export($e, true));
     flash("Error fetching items", "danger");
 }
+
+$TABLE_NAME = "Products";
+$results = [];
+if (isset($_POST["itemName"])) {
+    $db = getDB();
+    if (!has_role("Admin") && !has_role("shop_owner")) {
+        $stmt = $db->prepare("SELECT id, name, description, category, stock, unit_price from $TABLE_NAME WHERE category like :name  AND visibility = 1 LIMIT 50");
+    }
+    else {
+        $stmt = $db->prepare("SELECT id, name, description, category, stock, unit_price from $TABLE_NAME WHERE category like :name LIMIT 50");
+    }
+
+    try {
+        $stmt->execute([":name" => "%" . $_POST["itemName"] . "%"]);
+        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($r) {
+            $results = $r;
+        }
+    } catch (PDOException $e) {
+        error_log(var_export($e, true));
+        flash("Error fetching records", "danger");
+    }
+}
 ?>
 <script>
     function purchase(item) {
@@ -30,6 +53,18 @@ try {
 
 <div class="container-fluid">
     <h1>Shop</h1>
+
+    <!-- form for the filter by category -->
+    <form method="POST" class="row row-cols-lg-auto g-3 align-items-center">
+        <div class="input-group mb-3">
+            <input class="form-control" type="search" name="itemName" placeholder="Category Filter" />
+            <input class="btn btn-primary" type="submit" value="Search" />
+        </div>
+    </form>
+
+    <?php if (count($results) == 0) : ?>
+        <p>No results to show</p>
+    <?php else : ?>
     <div class="row row-cols-sm-2 row-cols-xs-1 row-cols-md-3 row-cols-lg-6 g-4">
         <?php foreach ($results as $item) : ?>
             <div class="col">
@@ -59,6 +94,7 @@ try {
                 </div>
             </div>
         <?php endforeach; ?>
+    <?php endif; ?>
     </div>
 </div>
 <?php

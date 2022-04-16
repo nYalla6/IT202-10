@@ -23,6 +23,7 @@ if (isset($_POST["itemName"])) {
     }
 }
 ?>
+
 <div class="container-fluid">
     <h1>List Items</h1>
     <form method="POST" class="row row-cols-lg-auto g-3 align-items-center">
