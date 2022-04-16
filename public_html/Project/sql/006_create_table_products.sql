@@ -1,11 +1,5 @@
 /*001_create_table_products.sql*/
 /*Products (id, name, description, category, stock, created, modified, unit_price, visibility [true, false])*/
-CREATE TABLE IF NOT EXISTS `Category` (
-    `category_name` VARCHAR(60) DEFAULT 'General',
-    PRIMARY KEY (`category_name`)
-);
-
-INSERT INTO Category(`category_name`) VALUES('General'); 
 CREATE TABLE IF NOT EXISTS `Products` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(100) NOT NULL UNIQUE,
@@ -17,8 +11,7 @@ CREATE TABLE IF NOT EXISTS `Products` (
     `unit_price` DECIMAL(10, 2) DEFAULT 0.00,
     `visibility` TINYINT(1) DEFAULT 1,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`category`) REFERENCES Category(`category_name`),
-    UNIQUE (`name`)
+    UNIQUE (`name`),
     check (stock >= 0), -- don't allow negative stock; I don't allow backorders
     check (unit_price >= 0) 
 );
