@@ -1,8 +1,8 @@
 <?php
 //note we need to go up 1 more directory
 require(__DIR__ . "/../../../partials/nav.php");
-$TABLE_NAME = "RM_Items";
-if (!has_role("Admin")) {
+$TABLE_NAME = "Products";
+if (!has_role("Admin") && !has_role("shop_owner")) {
     flash("You don't have permission to view this page", "warning");
     die(header("Location: $BASE_PATH/home.php"));
 }
@@ -10,7 +10,7 @@ if (!has_role("Admin")) {
 $results = [];
 if (isset($_POST["itemName"])) {
     $db = getDB();
-    $stmt = $db->prepare("SELECT id, name, description, stock, cost, image from $TABLE_NAME WHERE name like :name LIMIT 50");
+    $stmt = $db->prepare("SELECT id, name, description, category, stock, unit_price from $TABLE_NAME WHERE category like :name LIMIT 50");
     try {
         $stmt->execute([":name" => "%" . $_POST["itemName"] . "%"]);
         $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
