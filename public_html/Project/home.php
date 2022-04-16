@@ -51,7 +51,11 @@ try {
                         Cost: $<?php se($item, "unit_price"); ?>
                         <br>
                         <button onclick="purchase('<?php se($item, 'id'); ?>')" class="btn btn-primary">Buy Now</button>
+                        <?php if (has_role("Admin") || has_role("shop_owner")) : ?>
+                            <a href="admin/edit_item.php?id=<?php se($item, "id"); ?>">Edit</a>
+                        <?php endif; ?>
                     </div>
+
                 </div>
             </div>
         <?php endforeach; ?>
