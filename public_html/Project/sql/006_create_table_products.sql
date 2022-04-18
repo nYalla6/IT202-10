@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `Products` (
     `modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     `unit_price` DECIMAL(10, 2) DEFAULT 0.00,
     `visibility` TINYINT(1) DEFAULT 1,
-    PRIMARY KEY (`id`),
+    PRIMARY KEY (`id`, `unit_price`),
     UNIQUE (`name`),
     check (stock >= 0), -- don't allow negative stock; I don't allow backorders
     check (unit_price >= 0) 

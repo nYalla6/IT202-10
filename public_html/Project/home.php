@@ -99,9 +99,9 @@ try {
     function purchase(item) {
         console.log("TODO purchase item", item);
         alert("It's almost like you purchased an item, but not really");
-        // if (add_to_cart) {
-        //     add_to_cart(item);
-        // }
+        if (add_to_cart) {
+            add_to_cart(item);
+        }
     }
 </script>
 
@@ -171,7 +171,7 @@ try {
                                 <div class="card-body">
                                     <h5 class="card-title">Name: <?php se($item, "name"); ?></h5>
                                 </div>
-                                
+
                                 <div class="card-body">
                                     <a href="details.php?id=<?php se($item, "id"); ?>">Details</a>
                                 </div>
@@ -196,7 +196,7 @@ try {
                 </div>
             </div>
             <div class="col-4" style="min-width:0em">
-
+                <?php require(__DIR__ . "/../../partials/cart.php"); ?>
             </div>
         </div>
 </div>
