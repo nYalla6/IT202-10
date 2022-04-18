@@ -9,4 +9,4 @@ CREATE TABLE IF NOT EXISTS Cart(
     FOREIGN KEY (item_id) REFERENCES Products(id),
     UNIQUE KEY (user_id, item_id),
     check(quantity > 0)
-)
+);
