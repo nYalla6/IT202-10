@@ -5,7 +5,7 @@
  * @param array $params
  * @param int $per_page
  */
-function paginate($query, $params = [], $per_page = 10)
+function paginate($query, $params = [], $per_page = 3)
 {
     if (!isset($query) || empty($query)) {
         flash("Dev note: Query is empty/null", "danger");

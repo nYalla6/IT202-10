@@ -48,7 +48,7 @@ if (!empty($col) && !empty($order)) {
 }
 
 //paginate function
-$per_page = 10;
+$per_page = 3;
 paginate($total_query . $query, $params, $per_page);
 //get the total
 /* this comment block has been replaced by paginate()
