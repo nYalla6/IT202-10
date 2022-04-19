@@ -98,7 +98,6 @@ try {
 <script>
     function purchase(item) {
         console.log("TODO purchase item", item);
-        alert("It's almost like you purchased an item, but not really");
         if (add_to_cart) {
             add_to_cart(item);
         }
@@ -157,7 +156,7 @@ try {
     <?php else : ?>
         <div class="row">
             <div class="col">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 g-3">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-3">
                     <?php foreach ($results as $item) : ?>
                         <div class="col">
                             <div class="card bg-light" style="height:20em">
@@ -178,7 +177,7 @@ try {
 
                                 <div class="card-footer">
                                     Cost: $<?php se($item, "unit_price"); ?>
-                                    <button onclick="purchase('<?php se($item, 'id'); ?>')" class="btn btn-primary">Buy Now</button>
+                                    <button onclick="purchase('<?php se($item, 'id'); ?>')" class="btn btn-primary" style="margin-left: 10px">Buy Now</button>
                                     <br>
                                     <?php if (has_role("Admin") || has_role("shop_owner")) : ?>
                                         <a href="admin/edit_item.php?id=<?php se($item, "id"); ?>">Edit</a>
@@ -195,7 +194,7 @@ try {
                     <?php require(__DIR__ . "/../../partials/pagination.php"); ?>
                 </div>
             </div>
-            <div class="col-4" style="min-width:0em">
+            <div class="col-5" style="min-width:0em">
                 <?php require(__DIR__ . "/../../partials/cart.php"); ?>
             </div>
         </div>

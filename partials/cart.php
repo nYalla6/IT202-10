@@ -103,7 +103,7 @@ function map_column($col)
                     //name, c.id as line_id, item_id, quantity, cost, (cost*quantity) as subtotal
                     let row = document.createElement("tr");
 
-                    total += parseInt(r.subtotal * 100);
+                    total += parseInt(r.subtotal*100);
                     row.innerHTML =
                         `
                         <td>
@@ -132,7 +132,7 @@ function map_column($col)
                 row.innerHTML =
                     `
                 <td colspan="100%">
-                Total: $${parseFloat(total/100)}
+                Total: $${parseFloat(total/100).toFixed(2)}
                 </td>
                 `;
                 body.appendChild(row);
@@ -148,7 +148,7 @@ function map_column($col)
                 row.innerHTML =
                     `
                 <td colspan="100%">
-                    <button onclick="delete_cart()" class="btn btn-danger">Clear Table</button>
+                    <button onclick="delete_cart()" class="btn btn-danger">Clear Cart</button>
                 </td>
                 `;
                 body.appendChild(row);
