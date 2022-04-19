@@ -23,14 +23,16 @@
                     //name, c.id as line_id, item_id, quantity, cost, (cost*quantity) as subtotal
                     let row = document.createElement("tr");
 
-                    total += parseInt(r.subtotal*100);
+                    total += parseInt(r.subtotal * 100);
                     row.innerHTML =
                         `
                         <td>
                         ${r.name}
                         </td>
                         <td>
-                        ${r.quantity}
+                            <form method="POST">
+                                <input type="number" name="quantity" value="${r.quantity}">
+                            </form>
                         </td>
                         <td>
                         ${r.unit_price}
@@ -100,6 +102,24 @@
         });
     }
 
+    function delete_table() {
+        console.log("delete ele", ele);
+        postData({
+            line_id: line_id
+        }, "/Project/api/delete_entire_cart.php").then(data => {
+            console.log(data);
+            //lazily assuming it worked and removing from the DOM
+            //you'd ideally want to check to be sure if using a similar process
+            //ele.closest("tr").remove();
+            //turns out since I have total shown I need to recalculate that, and I'm lazy so instead...
+            //I'll refresh the full cart
+            if (get_cart) {
+                get_cart();
+            }
+
+        });
+    }
+
     function purchase_cart() {
         postData({}, "/Project/api/purchase_cart.php").then(data => {
             console.log(data);
@@ -109,9 +129,6 @@
                 flash(data.message, "danger");
             }
             get_cart();
-            if (refresh_balance) {
-                refresh_balance();
-            }
         })
     }
 
