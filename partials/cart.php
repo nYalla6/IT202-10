@@ -107,8 +107,11 @@ function map_column($col)
                     row.innerHTML =
                         `
                         <td>
-                        ${r.name}
-                        </td>
+                            ${r.name}
+                            <div class="card-body">
+                                        <a href="details.php?id=${r.item_id}; ?>">Details</a>
+                                    </div>
+                            </td>
                         <td>
                             <form method="POST">
                                 <input type="hidden" name="cart_id" value="${r.line_id}">
@@ -130,7 +133,7 @@ function map_column($col)
                 }
                 let row = document.createElement("tr");
                 row.innerHTML =
-                    `
+                `
                 <td colspan="100%">
                 Total: $${parseFloat(total/100).toFixed(2)}
                 </td>
