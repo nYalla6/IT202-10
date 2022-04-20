@@ -18,7 +18,7 @@ $columns = get_columns($TABLE_NAME);
 // echo "<pre>" . var_export($columns, true) . "</pre>";
 $ignore = ["id", "modified", "created"];
 ?>
-<div class="container-fluid">
+<div class="col-3 mx-auto" style="margin-left: 10px">
     <h1>Add Item</h1>
     <form method="POST">
         <?php foreach ($columns as $index => $column) : ?>
