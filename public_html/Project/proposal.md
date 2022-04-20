@@ -77,7 +77,7 @@
           * Hint: logic for the password check would be similar to login
     
 
-- [Milestone 2](https://ny6-prod.herokuapp.com/Project)
+- [Milestone 2](https://github.com/nYalla6/IT202-10/blob/prod/public_html/Project/milestone2.md)
   * [X] \(04/15/2022) User with an admin role or shop owner role will be able to add products to inventory
     * Table should be called <span style="text-decoration:underline;">Products</span> (id, name, description, category, stock, created, modified, unit_price, visibility [true, false])
     
