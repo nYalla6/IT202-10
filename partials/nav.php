@@ -44,7 +44,8 @@ session_start();
             <li class="nav-item"><a class="nav-link" href="<?php echo get_url('admin/create_role.php'); ?>">Create Role</a></li>
             <li class="nav-item"><a class="nav-link" href="<?php echo get_url('admin/list_roles.php'); ?>">List Roles</a></li>
             <li class="nav-item"><a class="nav-link" href="<?php echo get_url('admin/assign_roles.php'); ?>">Assign Roles</a></li>
-            <li class="nav-item"><a class="nav-link" href="<?php echo get_url('admin/create_invent2.php'); ?>">Create Inventory</a></li>            
+            <li class="nav-item"><a class="nav-link" href="<?php echo get_url('admin/create_invent2.php'); ?>">Create Inventory</a></li> 
+            <li class="nav-item"><a class="nav-link" href="<?php echo get_url('admin/list_items.php'); ?>">List Items</a></li>            
         <?php endif; ?>
         <?php if (is_logged_in()) : ?>
             <li class="nav-item"><a class="nav-link" href="<?php echo get_url('logout.php'); ?>">Logout</a></li>

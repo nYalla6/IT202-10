@@ -22,14 +22,19 @@ $category = se($_GET, "category", "", false);
 
 //split query into data and total
 $base_query = "SELECT id, name, description, category, unit_price, stock FROM Products";
+if (has_role("Admin") || has_role("shop_owner")) {
+    $base_query = "SELECT id, name, description, category, unit_price, stock, visibility FROM Products";
+}
+
 $total_query = "SELECT count(1) as total FROM Products";
 
 //dynamic query
-
+//ny6 4/20/22
 $query = " WHERE 1=1 and stock > 0 and visibility=1"; //1=1 shortcut to conditionally build AND clauses
 if (has_role("Admin") || has_role("shop_owner")) {
     $query = " WHERE 1=1 and stock > 0";
 }
+
 $params = []; //define default params, add keys as needed and pass to execute
 //apply name filter
 if (!empty($name)) {
@@ -37,6 +42,7 @@ if (!empty($name)) {
     $params[":name"] = "%$name%";
 }
 
+//apply category filter
 if (!empty($category) && $category != "select") {
     $query .= " AND category = :category";
     $params[":category"] = $category;
@@ -107,6 +113,7 @@ try {
 <div class="container-fluid">
     <h1>Shop</h1>
 
+    <!-- Namitha Yalla ny6 4/20/22 -->
     <form method="GET" class="row row-cols-auto g-3 align-items-center">
         <div class="col">
             <div class="input-group">
