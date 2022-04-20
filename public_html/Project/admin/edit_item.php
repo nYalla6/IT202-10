@@ -44,7 +44,7 @@ function map_column($col)
     return "text";
 }
 ?>
-<div class="container-fluid">
+<div class="col-4 mx-auto">
     <h1>Edit Item</h1>
     <form method="POST">
         <?php foreach ($result as $column => $value) : ?>
