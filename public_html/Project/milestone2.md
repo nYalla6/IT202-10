@@ -1,6 +1,6 @@
 <table><tr><td> <em>Assignment: </em> IT202 Milestone 2 Shop Project</td></tr>
 <tr><td> <em>Student: </em> Namitha Yalla(ny6)</td></tr>
-<tr><td> <em>Generated: </em> 4/20/2022 7:31:03 PM</td></tr>
+<tr><td> <em>Generated: </em> 4/20/2022 7:36:44 PM</td></tr>
 <tr><td> <em>Grading Link: </em> <a rel="noreferrer noopener" href="https://learn.ethereallab.app/homework/IT202-010-S22/it202-milestone-2-shop-project/grade/ny6" target="_blank">Grading</a></td></tr></table>
 <table><tr><td> <em>Instructions: </em> <ol>
 <li>Checkout Milestone2 branch </li>
@@ -60,10 +60,10 @@ All website links must be from prod (you can assume/infer this by getting your d
 </td></tr>
 </table></td></tr>
 <tr><td> <em>Sub-Task 2: </em> Add a screenshot of the Shop page showing both filters and a different sorting applied (should be more than 1 sample product)</td></tr>
-<tr><td><table><tr><td><img width="768px" src="https://user-images.githubusercontent.com/98120848/164163582-9f2c33a2-83ea-444b-9d96-da1d0464b2b0.png"/></td></tr>
+<tr><td><table><tr><td><img width="768px" src="https://user-images.githubusercontent.com/98120848/164341516-13b359c8-edb7-4bb3-af92-800cc74ac302.png"/></td></tr>
 <tr><td> <em>Caption:</em> <p>Page 1 of 2, items sorted under the toys filter<br></p>
 </td></tr>
-<tr><td><img width="768px" src="https://user-images.githubusercontent.com/98120848/164163646-dd35784f-11c9-41d5-a758-27a0028cab2d.png"/></td></tr>
+<tr><td><img width="768px" src="https://user-images.githubusercontent.com/98120848/164341541-0f2704b1-f7fd-408a-b15e-8be371f4456f.png"/></td></tr>
 <tr><td> <em>Caption:</em> <p>Page 2 of 2, items sorted under the toys filter<br></p>
 </td></tr>
 </table></td></tr>
