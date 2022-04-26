@@ -143,8 +143,10 @@ function map_column($col)
                 row.innerHTML =
                     `
                 <td colspan="100%">
-                <button class="btn btn-primary" onclick="purchase_cart()">Purchase</button>
-                </td>
+                <!-- other action buttons can go here-->
+                    <form action="<?php echo get_url('order.php'); ?>" method=" POST">
+                        <input type="submit" value="Purchase" class="btn btn-info" />
+                    </form>
                 `
                 body.appendChild(row);
                 row = document.createElement("tr");
