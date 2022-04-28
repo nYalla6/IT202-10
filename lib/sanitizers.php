@@ -15,7 +15,7 @@ function is_valid_username($username)
 
 function is_valid_address($address)
 {
-    return preg_match('\d+[ ](?:[A-Za-z0-9.-]+[ ]?)+(?:Avenue|Lane|Road|Boulevard|Drive|Street|Ave|Dr|Rd|Blvd|Ln|St)\.?', $address);
+    return preg_match('/^[0-9]{1,5}[ ]([A-Za-z0-9.-]+[ ])+(Avenue|Lane|Road|Boulevard|Drive|Street|Ave|Dr|Rd|Blvd|Ln|St)$/', $address);
 }
 
 function is_valid_password($password)

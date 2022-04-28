@@ -10,12 +10,6 @@ if (isset($_POST["purchase"])) {
 
     //TODO 3
     $hasError = false;
-    if (empty($email)) {
-        flash("Email must not be empty", "danger");
-        $hasError = true;
-    }
-    //sanitize
-    $email = sanitize_email($email);
 
     //validate address
     if (!is_valid_address($address)) {
