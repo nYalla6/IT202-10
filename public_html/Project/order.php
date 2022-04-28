@@ -7,13 +7,25 @@ if (isset($_POST["purchase"])) {
     $pay_method = se($_POST, "paytype", "", false);
     $payment = se($_POST, "payment", 0, false);
     $address = se($_POST, "address", 0, false);
+    $apt = se($_POST, "apptNum", "", false);
+    $city= se($_POST, "city", "", false);
+    $state = se($_POST, "state", "", false);
+    $country= se($_POST, "country", "", false);
+    $zipcode=se($_POST, "zipcode", "", false);
+
+
 
     //TODO 3
     $hasError = false;
 
-    //validate address
+    //validate address formatting
     if (!is_valid_address($address)) {
         flash("Invalid address", "danger");
+        $hasError = true;
+    }
+    //validate zipcode formatting
+    if (!is_valid_zipcode($zipcode)) {
+        flash("Invalid zipcode", "danger");
         $hasError = true;
     }
 
@@ -335,6 +347,10 @@ $username = get_username();
                         <option value="ZM">Zambia</option>
                         <option value="ZW">Zimbabwe</option>
                     </select>
+
+                    <br>
+                    <label class="card-title col-3" for="zipcode"><b>Zipcode</b></label>
+                    <input name="zipcode" type="number"/>
                 </div>
 
                 <!-- Submit Button -->
