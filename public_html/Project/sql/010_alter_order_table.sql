@@ -1,2 +1,2 @@
 ALTER TABLE `Orders`
-MODIFY COLUMN money_received DECIMAL(10, 2);
+MODIFY COLUMN total_price DECIMAL(10, 2);
