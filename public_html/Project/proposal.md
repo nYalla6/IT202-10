@@ -125,7 +125,7 @@
   * [X] \(04/19/2022) User will be able to clear their entire cart via a button click
  
 - Milestone 3
-  * [ ] \(mm/dd/yyyy of completion) User will be able to purchase items in their Cart
+  * [X] \(05/07/22) User will be able to purchase items in their Cart
     * Create an <span style="text-decoration:underline;">Orders</span> table (id, user_id, created, total_price, address, payment_method, money_received)
         * Payment method will simply record (Cash, Visa, MasterCard, Amex, etc) We will **not** be recording CC numbers or anything of that nature, this is just a sample and in real world projects you’d commonly use a third party payment processor
         * Hint: This must be inserted first before you can insert into the OrderItems table

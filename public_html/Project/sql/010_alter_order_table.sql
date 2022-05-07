@@ -1,0 +1,2 @@
+ALTER TABLE `Orders`
+MODIFY COLUMN total_price DECIMAL(10, 2);
