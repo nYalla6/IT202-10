@@ -60,11 +60,12 @@ if (isset($_POST["purchase"])) {
     $cart_price = 0;
     $actual_price = 0;
 
-    //validating the purchasing cost
+    //validating the purchasing cost against products
     foreach ($results as $result) {
         $cart_price = $cart_price + ($result["sale_price"] * $result["quantity"]);
 
         $actual_price = $actual_price + ($result["actual_cost"] * $result["quantity"]);
+
     }
 
 
@@ -72,6 +73,17 @@ if (isset($_POST["purchase"])) {
     if ($payment != $actual_price) {
         flash("Incorrect Payment Amount!", "danger");
         $hasError = true;
+    }
+
+    //checking that there is enough stock
+    foreach ($results as $res){
+        if ($res["stock"] < $res["quantity"]){
+            $name = $res["name"];
+            $amt = $res["stock"];
+            //printing out the amt of stock and what product it is
+            flash("Stock for $name: $amt", "danger");
+            $hasError = true;
+        }
     }
 
     if (!$hasError) {
@@ -86,7 +98,7 @@ if (isset($_POST["purchase"])) {
             flash("There was an error ordering", 'warning');
         }
 
-
+        //select order ID from orders table
         $stmt2 = $db->prepare("SELECT id FROM Orders WHERE user_id = :id ORDER BY Created DESC LIMIT 1");
         try {
             $stmt2->execute([":user_id" => $user_id]);
@@ -119,6 +131,7 @@ if (isset($_POST["purchase"])) {
 
 
                 //removing from stock (as if real purchase)
+                //updating products
                 $stmt4 = $db->prepare("UPDATE Products SET stock = $stock WHERE id = :item_id");
                 try{
                     $stmt4->execute([":item_id" => $item_id]);
