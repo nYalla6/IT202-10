@@ -57,7 +57,8 @@ try {
             </div>
         </div>
         <?php foreach ($order_items as $item) : ?>
-            <div class="col col-lg-3">
+            <div class="row-col col-lg-2">  
+
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title"><?php se($item, "name"); ?></h5>
@@ -75,6 +76,7 @@ try {
                         </div>
                     </div>
                 </div>
+                <br>
             </div>
         <?php endforeach; ?>
 

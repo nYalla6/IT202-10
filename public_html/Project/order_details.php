@@ -38,7 +38,8 @@ try {
 
 <div class="container-fluid">
     <h1 class="row justify-content-center">Order Details</h1>
-
+    <br>
+    <br>
     <div class="row justify-content-md-center">
         <div class="col col-lg-4">
             <div class="col-6">
