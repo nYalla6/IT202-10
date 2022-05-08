@@ -3,16 +3,36 @@ require_once(__DIR__ . "/../../partials/nav.php");
 is_logged_in(true);
 
 $results = [];
+$user_id = get_user_id();
+//calculating cart totals
+$db = getDB();
+$stmt = $db->prepare("SELECT Cart.item_id, Cart.user_id, Cart.quantity, Products.name, Products.unit_price as actual_price, Products.stock FROM Cart INNER JOIN Products ON Cart.item_id = Products.id WHERE Cart.user_id = :user_id");
+try {
+    $stmt->execute([":user_id" => $user_id]);
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if ($data) {
+        $results = $data;
+    }
+} catch (PDOException $e) {
+    error_log(var_export($e, true));
+}
 
+$actual_price = 0.0;
+
+//validating the purchasing cost against products
+foreach ($results as $result) {
+    $actual_price = $actual_price + ($result["actual_price"]) * ($result["quantity"]);
+    error_log("$actual_price");
+}
 
 //TODO 2: add PHP Code
 if (isset($_POST["purchase"])) {
     $user = se($_POST, "username", "", false);
     $pay_method = se($_POST, "paytype", "", false);
-    $payment = se($_POST, "payment", 0, false);
+    $payment = se($_POST, "payment", 0.0, false);
 
     //address to be concatenated
-    $address = se($_POST, "address", 0, false);
+    $address = se($_POST, "address", "", false);
     $apt = se($_POST, "apptNum", "", false);
     $city = se($_POST, "city", "", false);
     $state = se($_POST, "state", "", false);
@@ -42,42 +62,16 @@ if (isset($_POST["purchase"])) {
         $final_add = $address . " " . " " . $city . ", " . $state . " " . $zipcode . " ";
     }
 
-    //calculating cart totals
-    $db = getDB();
-    try {
-        $stmt = $db->prepare("SELECT Cart.user_id, Cart.item_id, Cart.quantity, Cart.unit_price as sale_price, Products.name, Products.unit_price as actual_price, Products.stock FROM Cart INNER JOIN Products ON Cart.item_id = Products.id WHERE Cart.user_id = :id");
-        $stmt->execute([":user_id" => $id]);
-        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $total = 0;
-
-        if ($data) {
-            $results = $data;
-        }
-    } catch (PDOException $e) {
-        flash(var_export($e, true));
-    }
-
-    $cart_price = 0;
-    $actual_price = 0;
-
-    //validating the purchasing cost against products
-    foreach ($results as $result) {
-        $cart_price = $cart_price + ($result["sale_price"] * $result["quantity"]);
-
-        $actual_price = $actual_price + ($result["actual_cost"] * $result["quantity"]);
-
-    }
-
 
     //checking if the payment amount matches the payment amount
     if ($payment != $actual_price) {
-        flash("Incorrect Payment Amount!", "danger");
+        flash("$actual_price vs. $payment Incorrect Payment Amount!", "danger");
         $hasError = true;
     }
 
     //checking that there is enough stock
-    foreach ($results as $res){
-        if ($res["stock"] < $res["quantity"]){
+    foreach ($results as $res) {
+        if ($res["stock"] < $res["quantity"]) {
             $name = $res["name"];
             $amt = $res["stock"];
             //printing out the amt of stock and what product it is
@@ -89,19 +83,13 @@ if (isset($_POST["purchase"])) {
     if (!$hasError) {
 
         //insert into orders!
-        $stmt = $db->prepare("INSERT INTO Orders (user_id, total_price, address, payment_method, money_received) VALUES(:id, :total, :final_add, :pay_method, :payment)");
-        try {
-            $stmt->execute([":user_id" => $id, ":total_price" => $total, ":address" => $final_add, ":payment_method" => $pay_method, "money_received" => $payment]);
-            flash("Successfully ordered!", "success");
-        } catch (Exception $e) {
-            error_log(var_export($e, true));
-            flash("There was an error ordering", 'warning');
-        }
+        add_order($id, $actual_price, $final_add, $pay_method, $payment);
 
         //select order ID from orders table
+        //$order_id = 0;
         $stmt2 = $db->prepare("SELECT id FROM Orders WHERE user_id = :id ORDER BY Created DESC LIMIT 1");
         try {
-            $stmt2->execute([":user_id" => $user_id]);
+            $stmt2->execute([":id" => $id]);
             $order = $stmt2->fetch(PDO::FETCH_ASSOC);
             if ($order) {
                 $order_id = $order["id"];
@@ -117,15 +105,15 @@ if (isset($_POST["purchase"])) {
             $unit_price = $result['actual_price'];
             $stock = $item['stock'] - $quantity;
 
-            if($item_id > 0 || $order_id > 0 || $quantity > 0){
+            if ($item_id > 0 || $order_id > 0 || $quantity > 0) {
                 $db = getDB();
-                try{
+                try {
 
-                //inserting into order items table for the order confirmation page
-                $stmt3 = $db->prepare("INSERT INTO OrderItems (order_id, item_id, quantity, unit_price) VALUES (:order_id, :item_id, :quantity, :unit_price");
+                    //inserting into order items table for the order confirmation page
+                    $stmt3 = $db->prepare("INSERT INTO OrderItems (order_id, item_id, quantity, unit_price) VALUES (:order_id, :item_id, :quantity, :unit_price");
 
-                $stmt3->execute([":order_id" => $order_id, ":item_id" => $item_id, ":quantity" => $quantity, ":unit_price" => $unit_price]);
-                } catch (PDOException $e){
+                    $stmt3->execute([":order_id" => $order_id, ":item_id" => $item_id, ":quantity" => $quantity, ":unit_price" => $unit_price]);
+                } catch (PDOException $e) {
                     error_log(var_export($e, true));
                 }
 
@@ -133,14 +121,12 @@ if (isset($_POST["purchase"])) {
                 //removing from stock (as if real purchase)
                 //updating products
                 $stmt4 = $db->prepare("UPDATE Products SET stock = $stock WHERE id = :item_id");
-                try{
+                try {
                     $stmt4->execute([":item_id" => $item_id]);
-                } catch (PDOException $e){
+                } catch (PDOException $e) {
                     error_log(var_export($e, true));
                 }
-
-            }
-            else {
+            } else {
                 flash("error with loading into orderitems", "warning");
             }
         }
@@ -152,7 +138,7 @@ if (isset($_POST["purchase"])) {
         } catch (PDOException $e) {
             error_log(var_export($e, true));
         }
-
+        
         //redirecting to the order confirmation page
         redirect("order_confirmation.php?id=" . $order_id);
     }
@@ -180,7 +166,7 @@ $username = get_username();
                 </div>
                 <div class="card-body">
                     <label class="card-title" for="payment"><b>Payment Amount</b></label>
-                    <input type="number" name="payment" />
+                    <input type="number" step="0.01" name="payment" />
                 </div>
 
                 <!-- Address -->
