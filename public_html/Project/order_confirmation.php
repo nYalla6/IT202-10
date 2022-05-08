@@ -40,7 +40,7 @@ try {
     <h3 class="row justify-content-center">Thank You for Purchasing From Us! :)</h3>
     <br>
     <br>
-    
+
     <div class="row justify-content-md-center">
         <div class="col col-lg-4">
             <div class="col-6">
@@ -63,9 +63,15 @@ try {
                         <h5 class="card-title"><?php se($item, "name"); ?></h5>
                     </div>
                     <div class="card-body">
-                        <p class="card-text">Unit Price: $ <?php se($item, "unit_price"); ?></p>
+                        <div class="mb-4">
+                            <label class="form-label">Unit Price: $<?php se($item, "unit_price"); ?></label>
+                        </div>
                         <div class="mb-4">
                             <label class="form-label" for="quantity">Quantity <?php se($item, "quantity"); ?> </label>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label" for="subtotal">Subtotal: $<?php se(number_format($item['quantity'] * $item['unit_price'], 2)); ?> </label>
                         </div>
                     </div>
                 </div>
