@@ -9,6 +9,7 @@ $order_items = [];
 $db = getDB();
 $stmt = $db->prepare("SELECT total_price, address, payment_method FROM Orders where id = :id");
 $order_id = se($_GET, "id", -1, false);
+
 try {
     $stmt->execute([":id" => $order_id]);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -36,11 +37,9 @@ try {
 ?>
 
 <div class="container-fluid">
-    <h1 class="row justify-content-center" 1>Order Confirmation</h1>
-    <h3 class="row justify-content-center">Thank You for Purchasing From Us! :)</h3>
+    <h1 class="row justify-content-center">Order Details</h1>
     <br>
     <br>
-
     <div class="row justify-content-md-center">
         <div class="col col-lg-4">
             <div class="col-6">
@@ -57,8 +56,7 @@ try {
             </div>
         </div>
         <?php foreach ($order_items as $item) : ?>
-            <div class="row-col col-lg-2">  
-
+            <div class="col col-lg-3">
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title"><?php se($item, "name"); ?></h5>
@@ -76,9 +74,7 @@ try {
                         </div>
                     </div>
                 </div>
-                <br>
             </div>
         <?php endforeach; ?>
 
-    </div>
 </div>
