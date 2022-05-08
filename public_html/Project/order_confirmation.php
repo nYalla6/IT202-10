@@ -19,7 +19,7 @@ try {
         $price = $result["total_price"];
     }
 } catch (PDOException $e) {
-    flash("<pre>" . var_export($e, true) . "</pre>");
+    error_log("<pre>" . var_export($e, true) . "</pre>");
 }
 
 $stmt = $db->prepare("SELECT OrderItems.quantity, OrderItems.unit_price, Products.name FROM OrderItems INNER JOIN Products ON OrderItems.product_id = Products.id WHERE OrderItems.order_id = :order_id");

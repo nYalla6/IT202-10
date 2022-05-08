@@ -68,49 +68,6 @@ try {
 ?>
 <div class="container-fluid">
     <h1>Purchase History</h1>
-    <form method="GET" class="row row-cols-lg-auto g-3 align-items-center">
-    <label for="category">Search by Category:</label>
-        <select name="category" id="category">
-            <option value="select">select</option>
-            <option value="lunch">Lunch</option>
-            <option value="dessert">Dessert</option>
-            <option value="drinks">Drinks</option>
-            <option value="sides">Sides</option>
-        </select>
-    <label for="created">Search by Purchase Date:</label>  
-        <select name="created" id="created">
-            <option value="select">select</option>
-            <option value="day">Past Day</option>
-            <option value="week">Past Week</option>
-            <option value="month">Past Month</option>
-            <option value="year">Past Year</option>
-        </select>  
-        <label for="col">Sort By:</label>
-        <select name="col" id="col">
-            <option value="select">select</option>
-            <option value="total_price">Total Price</option>
-            <option value="created">Time</option>
-        </select>
-        <select name="order" value="<?php se($order)?>">
-            <option value="select">select</option>
-            <option value="asc">Low to high</option>
-            <option value="desc">High to low</option>
-        </select>
-        <input type="submit"  class = "btn btn-primary" value='Search'>
-    </form>
-    <label for="col">Sort By:</label>
-        <select name="col" id="col">
-            <option value="select">select</option>
-            <option value="total_price">Total Price</option>
-            <option value="created">Time</option>
-        </select>
-        <select name="order" value="<?php se($order)?>">
-            <option value="select">select</option>
-            <option value="asc">Low to high</option>
-            <option value="desc">High to low</option>
-        </select>
-        <input type="submit"  class = "btn btn-primary" value='Search'>
-    </form>
     
     <?php include(__DIR__. "/../../partials/pagination.php"); ?>
         <?php foreach ($results as $item) : ?>
@@ -126,7 +83,7 @@ try {
                         <label class="form-label" for="pay">Payment Method <?php se($item["payment_method"])?> </label>
                     </div>
                     <div class="card-footer">
-                        Total Cost: $ <?php se($item, "total_price"); ?>
+                        Total Cost: $<?php se($item, "total_price"); ?>
                         <a href="order_details.php?id=<?php se($item, "id"); ?>">Order Details</a>
                     </div>
                 </div>
