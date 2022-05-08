@@ -1,10 +1,10 @@
 <?php
-require(__DIR__."/../../partials/nav.php");
+require(__DIR__ . "/../../partials/nav.php");
 
 is_logged_in(true);
 
-$order_results=[];
-$order_items=[];
+$order_results = [];
+$order_items = [];
 
 $db = getDB();
 $stmt = $db->prepare("SELECT total_price, address, payment_method FROM Orders where id = :id");
@@ -12,14 +12,13 @@ $order_id = se($_GET, "id", -1, false);
 try {
     $stmt->execute([":id" => $order_id]);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($r) {
-        $order_results = $r;
-        $address= $r["address"];
-        $pay_method = $r["payment_method"];
-        $price = $r["total_price"];
+    if ($result) {
+        $order_results = $result;
+        $address = $result["address"];
+        $pay_method = $result["payment_method"];
+        $price = $result["total_price"];
     }
-    
-}catch (PDOException $e) {
+} catch (PDOException $e) {
     flash("<pre>" . var_export($e, true) . "</pre>");
 }
 
@@ -30,9 +29,48 @@ try {
     if ($r) {
         $order_items = $r;
     }
-    
-}catch (PDOException $e) {
+} catch (PDOException $e) {
     error_log(var_export($e, true));
 }
 
 ?>
+
+<div class="container-fluid">
+    <h1 class="row justify-content-center" 1>Order Confirmation</h1>
+    <h3 class="row justify-content-center">Thank You for Purchasing From Us! :)</h3>
+    <br>
+    <br>
+    
+    <div class="row justify-content-md-center">
+        <div class="col col-lg-4">
+            <div class="col-6">
+                <label class="form-label" for="address"><b>Address</b></label>
+                <label class="form-control" for="country"><?php se($address); ?></label>
+            </div>
+            <div class="col-6">
+                <label class="form-label" for="total"><b>Total Price</b></label>
+                <label class="form-control" for="total"><?php se("$ " . $result["total_price"]); ?></label>
+            </div>
+            <div class="col-6">
+                <label class="form-label" for="payment"><b>Payment Method</b></label>
+                <label class="form-control" for="country"><?php se($result["payment_method"]); ?></label>
+            </div>
+        </div>
+        <?php foreach ($order_items as $item) : ?>
+            <div class="col col-lg-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title"><?php se($item, "name"); ?></h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Unit Price: $ <?php se($item, "unit_price"); ?></p>
+                        <div class="mb-4">
+                            <label class="form-label" for="quantity">Quantity <?php se($item, "quantity"); ?> </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+
+    </div>
+</div>

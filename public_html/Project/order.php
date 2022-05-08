@@ -64,7 +64,7 @@ if (isset($_POST["purchase"])) {
 
 
     //checking if the payment amount matches the payment amount
-    if ($payment != $actual_price) {
+    if ($payment < $actual_price) {
         flash("$actual_price vs. $payment Incorrect Payment Amount!", "danger");
         $hasError = true;
     }
@@ -103,33 +103,20 @@ if (isset($_POST["purchase"])) {
             $item_id = $result['item_id'];
             $quantity = $result['quantity'];
             $unit_price = $result['actual_price'];
-            $stock = $item['stock'] - $quantity;
+            $stock = $result['stock'] - $quantity;
 
-            if ($item_id > 0 || $order_id > 0 || $quantity > 0) {
-                $db = getDB();
-                try {
-
-                    //inserting into order items table for the order confirmation page
-                    $stmt3 = $db->prepare("INSERT INTO OrderItems (order_id, item_id, quantity, unit_price) VALUES (:order_id, :item_id, :quantity, :unit_price");
-
-                    $stmt3->execute([":order_id" => $order_id, ":item_id" => $item_id, ":quantity" => $quantity, ":unit_price" => $unit_price]);
-                } catch (PDOException $e) {
-                    error_log(var_export($e, true));
-                }
-
-
-                //removing from stock (as if real purchase)
-                //updating products
-                $stmt4 = $db->prepare("UPDATE Products SET stock = $stock WHERE id = :item_id");
-                try {
-                    $stmt4->execute([":item_id" => $item_id]);
-                } catch (PDOException $e) {
-                    error_log(var_export($e, true));
-                }
-            } else {
-                flash("error with loading into orderitems", "warning");
+            add_order_items($order_id, $item_id, $quantity, $unit_price);
+            //removing from stock (as if real purchase)
+            //updating products
+            $stmt3 = $db->prepare("UPDATE Products SET stock = $stock WHERE id = :item_id");
+            try {
+                $stmt3->execute([":item_id"
+                 => $item_id]);
+            } catch (PDOException $e) {
+                error_log(var_export($e, true));
             }
         }
+
 
         //removing the items from cart 
         $stmt5 = $db->prepare("DELETE from Cart WHERE user_id = :user_id");
@@ -138,7 +125,7 @@ if (isset($_POST["purchase"])) {
         } catch (PDOException $e) {
             error_log(var_export($e, true));
         }
-        
+
         //redirecting to the order confirmation page
         redirect("order_confirmation.php?id=" . $order_id);
     }
