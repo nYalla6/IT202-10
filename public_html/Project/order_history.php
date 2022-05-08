@@ -10,11 +10,16 @@ $db = getDB();
 $user_id = get_user_id();
 $params = [];
 $total_query = "SELECT count(1) AS total FROM Orders INNER JOIN OrderItems ON OrderItems.order_id= Orders.id INNER JOIN Products ON OrderItems.product_id = Products.id";
-$base_query = "SELECT Orders.id, Orders.created, Orders.total_price, Orders.address, Orders.payment_method FROM Orders";
+$base_query = "SELECT Orders.id, Orders.user_id, Orders.created, Orders.total_price, Orders.address, Orders.payment_method FROM Orders";
 $query = " WHERE user_id = :user_id";
 $params[":user_id"] = $user_id;
 
 $per_page = 10;
+
+if (has_role("shop_owner")){
+    $query=" ";
+    $params=[];
+}
 
 paginate($total_query . $query, $params, $per_page);
 $query .= " LIMIT :offset, :count";
@@ -26,7 +31,7 @@ $stmt = $db->prepare($base_query . $query); //dynamically generated query
 foreach ($params as $key => $value) {
     $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
     $stmt->bindValue($key, $value, $type);
-    error_log("bound data: " . var_export($key, true));
+    //error_log("bound data: " . var_export($key, true));
 }
 $params = null; //set it to null to avoid issues
 
@@ -35,7 +40,7 @@ try {
     $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($r) {
         $results = $r;
-        error_log("got data: " . var_export($results, true));
+        //error_log("got data: " . var_export($results, true));
     }
 } catch (PDOException $e) {
     //flash("<pre>" . var_export($e, true) . "</pre>");
@@ -47,14 +52,14 @@ try {
     <h1>Purchase History</h1>
 
     <?php include(__DIR__ . "/../../partials/pagination.php"); ?>
-    <!-- the foreach loop for each order item -->
+    <!-- the foreach loop -->
     <?php foreach ($results as $item) : ?>
         <?php $time = strtotime($item['created']);
         $date = date("m/d/Y", $time); ?>
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title">Purchase Date: <?php se($date); ?></h5>
+                    <h5 class="card-title">Purchase Date: <?php se($date); ?><?php if (has_role("shop_owner")): ?>, User: <?php se($item['user_id']); ?> <?php endif ?></h5>
                 </div>
                 <div class="card-body">
                     <label class="form-label" for="ship">Shipping Address: <?php se($item["address"]) ?> </label>
