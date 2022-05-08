@@ -124,8 +124,8 @@
   
   * [X] \(04/19/2022) User will be able to clear their entire cart via a button click
  
-- Milestone 3
-  * [ ] \(mm/dd/yyyy of completion) User will be able to purchase items in their Cart
+- [Milestone 3](https://github.com/nYalla6/IT202-10/blob/Milestone3/public_html/Project/milestone3.md)
+  * [X] \(05/07/2022) User will be able to purchase items in their Cart
     * Create an <span style="text-decoration:underline;">Orders</span> table (id, user_id, created, total_price, address, payment_method, money_received)
         * Payment method will simply record (Cash, Visa, MasterCard, Amex, etc) We will **not** be recording CC numbers or anything of that nature, this is just a sample and in real world projects you’d commonly use a third party payment processor
         * Hint: This must be inserted first before you can insert into the OrderItems table
@@ -160,18 +160,18 @@
         * Clear out the user’s cart after successful order
         * Redirect user to Order Confirmation Page
         * 
-* [ ] \(mm/dd/yyyy of completion) Order Confirmation Page
+* [X] \(05/08/2022) Order Confirmation Page
     * Show the entire order details from the Order and OrderItems table (similar to cart)
         * Including a the cost of each line item and the total value
         * Show how they purchased and how much they paid
     * Displays a Thank you message
     
-* [ ] \(mm/dd/yyyy of completion) User will be able to see their Purchase History
+* [X] \(05/08/2022) User will be able to see their Purchase History
     * For now limit to 10 most recent orders
     * Show a summary of relevant information
     * A list item can be clicked to view the full details in the Order Details Page (similar to Order Confirmation Page except no “Thank you” message)
     
-* [ ] \(mm/dd/yyyy of completion) Store Owner will be able to see all Purchase History
+* [X] \(05/08/2022) Store Owner will be able to see all Purchase History
     * For now limit to 10 most recent orders
     * A list item can be clicked to view the full details in the Order Details Page (similar to Order Confirmation Page except no “Thank you” message)
 
