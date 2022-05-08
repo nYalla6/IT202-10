@@ -10,20 +10,18 @@ if (isset($_POST["quantity"])) {
         $line_id = $_POST['cart_id'];
         $user_id = get_user_id();
         $stmt = $db->prepare("DELETE FROM Cart where id = :id and user_id = :uid");
-        
+
         try {
             //added user_id to ensure the user can only delete their own items
             $stmt->execute([":id" => $line_id, ":uid" => $user_id]);
             $response["status"] = 200;
             $response["message"] = "Deleted line item";
             http_response_code(200);
-
         } catch (PDOException $e) {
             flash("<pre>" . var_export($e, true) . "</pre>");
             error_log("Error deleting line item: " . var_export($e, true));
             $response["message"] = "Error deleting item";
         }
-
     } else if (update_data($TABLE_NAME, $_POST["cart_id"], $_POST, ["cart_id"])) {
         flash("Updated item", "success");
         $db = getDB();
@@ -103,7 +101,8 @@ function map_column($col)
                     //name, c.id as line_id, item_id, quantity, cost, (cost*quantity) as subtotal
                     let row = document.createElement("tr");
 
-                    total += parseInt(r.subtotal*100);
+
+                    total += parseInt(r.subtotal * 100);
                     row.innerHTML =
                         `
                         <td>
@@ -131,20 +130,34 @@ function map_column($col)
                     body.appendChild(row);
 
                 }
+
+
                 let row = document.createElement("tr");
-                row.innerHTML =
-                `
-                <td colspan="100%">
-                Total: $${parseFloat(total/100).toFixed(2)}
-                </td>
-                `;
+                if (total != 0) {
+                    row.innerHTML =
+                        `
+                        <td colspan="100%">
+                        Total: $${parseFloat(total/100).toFixed(2)}
+                        </td>
+                        `;
+                }
+                else{
+                    row.innerHTML =
+                        `
+                        <td align="center" colspan="100%">
+                        No Items in Cart
+                        </td>
+                        `;
+                }
                 body.appendChild(row);
                 row = document.createElement("tr");
                 row.innerHTML =
                     `
                 <td colspan="100%">
-                <button class="btn btn-primary" onclick="purchase_cart()">Purchase</button>
-                </td>
+                <!-- other action buttons can go here-->
+                    <form action="<?php echo get_url('order.php'); ?>" method=" POST">
+                        <input type="submit" value="Purchase" class="btn btn-info" />
+                    </form>
                 `
                 body.appendChild(row);
                 row = document.createElement("tr");

@@ -32,5 +32,8 @@ require(__DIR__ . "/update_data.php");
 
 require(__DIR__ . "/paginate.php");
 
+//public private redirect
+require(__DIR__ . "/redirect.php");
+
 
 ?>
