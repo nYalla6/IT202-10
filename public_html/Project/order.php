@@ -44,6 +44,7 @@ if (isset($_POST["purchase"])) {
 
     $hasError = false;
 
+    //Namitha Yalla ny6 05/08/22
     //validate address formatting
     if (!is_valid_address($address)) {
         flash("Invalid address", "danger");
@@ -68,7 +69,7 @@ if (isset($_POST["purchase"])) {
         flash("$actual_price vs. $payment Incorrect Payment Amount!", "danger");
         $hasError = true;
     }
-
+    
     //checking that there is enough stock
     foreach ($results as $res) {
         if ($res["stock"] < $res["quantity"]) {
