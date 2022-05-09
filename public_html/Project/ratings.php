@@ -12,7 +12,7 @@ $product_id = se($_GET, "id", -1, false);
 $user_id = get_user_id();
 
 $db = getDB();
-$stmt = $db->prepare("SELECT name, avg_rating, num_rating FROM Products where id =:id");
+$stmt = $db->prepare("SELECT name, avg_rating, num_rating FROM Products where id = :id");
 try {
     $stmt->execute([":id" => $product_id]);
     $r = $stmt->fetch(PDO::FETCH_ASSOC);

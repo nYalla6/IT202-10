@@ -23,12 +23,13 @@ try {
     error_log("<pre>" . var_export($e, true) . "</pre>");
 }
 
-$stmt = $db->prepare("SELECT OrderItems.quantity, OrderItems.unit_price, Products.name FROM OrderItems INNER JOIN Products ON OrderItems.product_id = Products.id WHERE OrderItems.order_id = :order_id");
+$stmt = $db->prepare("SELECT OrderItems.quantity, OrderItems.unit_price, Products.name, Products.id FROM OrderItems INNER JOIN Products ON OrderItems.product_id = Products.id WHERE OrderItems.order_id = :order_id");
 try {
     $stmt->execute([":order_id" => $order_id]);
     $r = $stmt->fetchALL(PDO::FETCH_ASSOC);
     if ($r) {
         $order_items = $r;
+        error_log(var_export($r, true));
     }
 } catch (PDOException $e) {
     error_log(var_export($e, true));
@@ -71,6 +72,10 @@ try {
 
                         <div class="mb-4">
                             <label class="form-label" for="subtotal">Subtotal: $<?php se(number_format($item['quantity'] * $item['unit_price'], 2)); ?> </label>
+                        </div>
+
+                        <div class="mb-4">
+                            <a href="ratings.php?id=<?php se($item, "id"); ?>")>Rate Product</a>
                         </div>
                     </div>
                 </div>
