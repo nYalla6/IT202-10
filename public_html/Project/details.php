@@ -10,6 +10,7 @@ $ignore = ["id", "name", "modified", "created", "avg_rating" ,"num_rating"];
 $db = getDB();
 //get the item
 $id = se($_GET, "id", -1, false);
+$user_id = get_user_id();
 
 $stmt = $db->prepare("SELECT * FROM $TABLE_NAME where id =:id");
 try {
@@ -17,11 +18,30 @@ try {
     $r = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($r) {
         $result = $r;
+        $avg_rating=$r['avg_rating'];
+        $avg_rating = round($avg_rating, 1);
     }
 } catch (PDOException $e) {
     error_log(var_export($e, true));
     flash("Error looking up record", "danger");
 }
+
+//see if the user has purchases to allow them to rate
+$purchase = false;
+$stmt = $db->prepare("SELECT Orders.id FROM Orders INNER JOIN OrderItems ON OrderItems.order_id = Orders.id WHERE Orders.user_id = :user_id && OrderItems.product_id = :product_id");
+
+try {
+    $stmt->execute([":user_id" => $user_id, ":product_id" => $id ]);
+    $r = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($r) {
+        $purchase = true;
+    }
+    
+} catch (PDOException $e) {
+    error_log("<pre>" . var_export($e, true) . "</pre>");
+}
+
+
 //uses the fetched columns to map via input_map()
 function map_column($col)
 {
