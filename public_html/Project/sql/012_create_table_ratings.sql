@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS Ratings (
     rating INT,
     `comment` TEXT,
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(id),
     FOREIGN KEY (product_id) REFERENCES Products(id),
     check (rating > 0),

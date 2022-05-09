@@ -6,10 +6,11 @@ $TABLE_NAME = "Products";
 $result = [];
 $columns = get_columns($TABLE_NAME);
 //echo "<pre>" . var_export($columns, true) . "</pre>";
-$ignore = ["id", "name", "modified", "created"];
+$ignore = ["id", "name", "modified", "created", "avg_rating" ,"num_rating"];
 $db = getDB();
 //get the item
 $id = se($_GET, "id", -1, false);
+
 $stmt = $db->prepare("SELECT * FROM $TABLE_NAME where id =:id");
 try {
     $stmt->execute([":id" => $id]);
