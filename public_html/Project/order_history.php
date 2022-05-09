@@ -133,10 +133,10 @@ try {
                     <h5 class="card-title">Purchase Date: <?php se($date); ?><?php if (has_role("shop_owner")): ?>, User: <?php se($item['user_id']); ?> <?php endif ?></h5>
                 </div>
                 <div class="card-body">
-                    <label class="form-label" for="ship">Shipping Address: <?php se($item["address"]) ?> </label>
-                    <label class="form-label" for="pay">Payment Method: <?php se($item["payment_method"]) ?> </label>
+                    <label class="form-label" for="ship"> <b>Shipping Address:</b> <?php se($item["address"]) ?> </label>
+                    <label class="form-label" for="pay"><b>Payment Method:</b> <?php se($item["payment_method"]) ?> </label>
                     <br>
-                    <label class="form-label" for="category-value">Category: <?php se($item["category"]) ?> </label>
+                    <label class="form-label" for="category-value"><b>Category:</b> <?php se($item["category"]) ?> </label>
                 </div>
                 <div class="card-footer">
                     Total Cost: $ <?php se($item, "total_price"); ?>
