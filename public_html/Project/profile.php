@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . "/../../partials/nav.php");
 is_logged_in(true);
+
 //handle public profile
 $user_id = (int)se($_GET, "id", get_user_id(), false);
 $isMe = $user_id == get_user_id();
@@ -70,6 +71,7 @@ if (isset($_POST["save"]) && $isMe && $isEdit) {
         }
     }
 }
+
 //select fresh data from table
 $stmt = $db->prepare("SELECT id, email, username,visibility, created from Users where id = :id LIMIT 1");
 $isVisible = false;
@@ -97,7 +99,8 @@ try {
 }
 ?>
 <div class="container-fluid">
-    <h1>Profile</h1>
+    <h1 class="mb-4 text-center">Profile</h1>
+
 
     <?php if ($isMe && $isEdit) : ?>
         <?php if ($isMe) : ?>
@@ -137,16 +140,28 @@ try {
             <input type="submit" class="mt-3 btn btn-primary" value="Update Profile" name="save" />
         </form>
     <?php else : ?>
-        <?php if ($isMe) : ?>
-            <a href="?edit">Edit</a>
-        <?php endif; ?>
+
+
         <?php if ($isVisible || $isMe) : ?>
-            TODO: Define your visible profile
+            <!-- TODO: Define your visible profile -->
+            <div class="row justify-content-md-center">
+                <div class="col-sm-6">
+                    <div class="card justify-content-center">
+                        <div class="card-header">
+                            <h3 class="card-title">User: <?php se($username); ?></h3>
+                        </div>
+                        <div class="card-body">
+                            Joined: <?php se($joined); ?>
+                        </div>
+                        <div class="card-footer">
+                            <?php if ($isMe) : ?>
 
-            This is <?php se($username); ?>
+                                <a href="?edit"> <b>Edit</b> </a>
 
-            <div>
-                Joined: <?php se($joined); ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
             </div>
         <?php else : ?>
             Profile is private
