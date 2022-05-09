@@ -151,7 +151,13 @@ try {
                             <h3 class="card-title">User: <?php se($username); ?></h3>
                         </div>
                         <div class="card-body">
-                            Joined: <?php se($joined); ?>
+                            <div class="mb-4">
+                                <b>Joined:</b> <?php se($joined); ?>
+                            </div>
+                            <!-- only showing email address if visible -->
+                            <div class="mb-2">
+                                <b>Email Address:</b> <?php se($email) ?>
+                            </div>
                         </div>
                         <div class="card-footer">
                             <?php if ($isMe) : ?>
