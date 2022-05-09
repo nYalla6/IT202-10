@@ -5,21 +5,51 @@ require(__DIR__ . "/../../partials/flash.php");
 
 is_logged_in(true);
 $results = [];
+$params = [];
 
 $db = getDB();
 $user_id = get_user_id();
-$params = [];
+
+
 $total_query = "SELECT count(1) AS total FROM Orders INNER JOIN OrderItems ON OrderItems.order_id= Orders.id INNER JOIN Products ON OrderItems.product_id = Products.id";
-$base_query = "SELECT Orders.id, Orders.user_id, Orders.created, Orders.total_price, Orders.address, Orders.payment_method FROM Orders";
+$base_query = "SELECT DISTINCT Orders.id, Orders.total_price, Orders.address, Orders.payment_method, Products.category, Orders.created FROM Orders INNER JOIN OrderItems ON OrderItems.order_id= Orders.id INNER JOIN Products ON OrderItems.product_id = Products.id";
 $query = " WHERE user_id = :user_id";
 $params[":user_id"] = $user_id;
-
-$per_page = 10;
 
 if (has_role("shop_owner")){
     $query=" ";
     $params=[];
 }
+
+$column_created = se($_GET, "col", "created", false);
+//allowed
+if (!in_array($column_created, ["total_price", "category", "created"])){
+    $column_created = "created"; //created default value
+}
+
+$order = se($_GET, "order", "asc", false);
+//allowed
+if (!in_array($order, ["asc", "desc"])){
+    $column_created = "desc"; //created default value
+}
+
+$category = se($_GET,"category", "", false);
+if($category != "select" && !(empty($category))){
+    $query .= " AND Products.category = :category";
+    $params[":category"] = $category;
+}
+
+$time_created = se($_GET, "created", "", false);
+if($time_created != "select" && !(empty($time_created))){
+    $query .= " AND Orders.created >= DATE_SUB(NOW(), INTERVAL 1 $time_created)";
+    
+}
+
+if (!empty($col) && !empty($order) && $col != "select" && $order != "select") {
+    $query .= " ORDER BY Orders.$column_created $order"; 
+}
+
+$per_page = 10;
 
 paginate($total_query . $query, $params, $per_page);
 $query .= " LIMIT :offset, :count";
@@ -31,7 +61,7 @@ $stmt = $db->prepare($base_query . $query); //dynamically generated query
 foreach ($params as $key => $value) {
     $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
     $stmt->bindValue($key, $value, $type);
-    //error_log("bound data: " . var_export($key, true));
+    
 }
 $params = null; //set it to null to avoid issues
 
@@ -50,7 +80,48 @@ try {
 
 <div class="container-fluid">
     <h1>Purchase History</h1>
-
+    <form method="GET" class="row row-cols-lg-auto g-3 align-items-center">
+    <label for="category">Search by Category:</label>
+        <select name="category" id="category">
+            <option value="select">select</option>
+            <option value="General">General</option>
+            <option value="Toys">Toys</option>
+        </select>
+    <label for="created">Search by Purchase Date:</label>  
+        <select name="created" id="created">
+            <option value="select">select</option>
+            <option value="day">Past Day</option>
+            <option value="week">Past Week</option>
+            <option value="month">Past Month</option>
+            <option value="year">Past Year</option>
+        </select>  
+        <label for="col">Sort By:</label>
+        <select name="col" id="col">
+            <option value="select">select</option>
+            <option value="total_price">Total Price</option>
+            <option value="created">Time</option>
+        </select>
+        <select name="order" value="<?php se($order)?>">
+            <option value="select">select</option>
+            <option value="asc">Low to high</option>
+            <option value="desc">High to low</option>
+        </select>
+        <input type="submit"  class = "btn btn-primary" value='Search'>
+    </form>
+    <label for="col">Sort By:</label>
+        <select name="col" id="col">
+            <option value="select">select</option>
+            <option value="total_price">Total Price</option>
+            <option value="created">Time</option>
+        </select>
+        <select name="order" value="<?php se($order)?>">
+            <option value="select">select</option>
+            <option value="asc">Low to high</option>
+            <option value="desc">High to low</option>
+        </select>
+        <input type="submit"  class = "btn btn-primary" value='Search'>
+    </form>
+    
     <?php include(__DIR__ . "/../../partials/pagination.php"); ?>
     <!-- the foreach loop -->
     <?php foreach ($results as $item) : ?>
@@ -64,6 +135,8 @@ try {
                 <div class="card-body">
                     <label class="form-label" for="ship">Shipping Address: <?php se($item["address"]) ?> </label>
                     <label class="form-label" for="pay">Payment Method: <?php se($item["payment_method"]) ?> </label>
+                    <br>
+                    <label class="form-label" for="category-value">Category: <?php se($item["category"]) ?> </label>
                 </div>
                 <div class="card-footer">
                     Total Cost: $ <?php se($item, "total_price"); ?>
