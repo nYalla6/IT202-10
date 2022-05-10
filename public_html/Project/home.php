@@ -8,7 +8,7 @@ $db = getDB();
 $col = se($_GET, "col", "cost", false);
 
 //allowed list
-if (!in_array($col, ["name", "description", "category", "unit_price", "created"])) {
+if (!in_array($col, ["name", "description", "category", "unit_price", "created", "avg_rating"])) {
     $col = "unit_price"; //default value, prevent sql injection
 }
 $order = se($_GET, "order", "asc", false);
@@ -19,11 +19,12 @@ if (!in_array($order, ["asc", "desc"])) {
 //get name partial search
 $name = se($_GET, "name", "", false);
 $category = se($_GET, "category", "", false);
+$avg_rating =
 
-//split query into data and total
-$base_query = "SELECT id, name, description, category, unit_price, stock FROM Products";
+    //split query into data and total
+    $base_query = "SELECT id, name, description, category, unit_price, stock, avg_rating FROM Products";
 if (has_role("Admin") || has_role("shop_owner")) {
-    $base_query = "SELECT id, name, description, category, unit_price, stock, visibility FROM Products";
+    $base_query = "SELECT id, name, description, category, unit_price, stock, avg_rating, visibility FROM Products";
 }
 
 $total_query = "SELECT count(1) as total FROM Products";
@@ -53,28 +54,12 @@ if (!empty($col) && !empty($order)) {
     $query .= " ORDER BY $col $order"; //be sure you trust these values, I validate via the in_array checks above
 }
 
+
 //paginate function
 $per_page = 3;
 paginate($total_query . $query, $params, $per_page);
 //get the total
-/* this comment block has been replaced by paginate()
-//get the total
-$stmt = $db->prepare($total_query . $query);
-$total = 0;
-try {
-    $stmt->execute($params);
-    $r = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($r) {
-        $total = (int)se($r, "total", 0, false);
-    }
-} catch (PDOException $e) {
-    flash("<pre>" . var_export($e, true) . "</pre>");
-}
-//apply the pagination (the pagination stuff will be moved to reusable pieces later)
-$page = se($_GET, "page", 1, false); //default to page 1 (human readable number)
-$per_page = 3; //how many items to show per page (hint, this could also be something the user can change via a dropdown or similar)
-$offset = ($page - 1) * $per_page;
-end commented out coded moved to paginate()*/
+
 $query .= " LIMIT :offset, :count";
 $params[":offset"] = $offset;
 $params[":count"] = $per_page;
@@ -135,6 +120,11 @@ try {
                     //value setting only works after the options are defined and php has the value set prior
                     document.forms[0].col.value = "<?php se($col); ?>";
                 </script>
+                <select name="col" id="col">
+                    <option value="select">select</option>
+                    <option value="total_price">Total Price</option>
+                    <option value="avg_rating">Rating</option>
+                </select>
                 <select class="form-control" name="order" value="<?php se($order); ?>">
                     <option class="bg-white" value="asc">Up</option>
                     <option class="bg-white" value="desc">Down</option>

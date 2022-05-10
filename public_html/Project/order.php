@@ -59,13 +59,14 @@ if (isset($_POST["purchase"])) {
     //some addresses do not have apt
     if (strlen($apt) > 0) {
         $final_add = $address . " " . $apt . " " . $city . ", " . $state . " " . $zipcode . " ";
-    } else {
+    } else
+     {
         $final_add = $address . " " . " " . $city . ", " . $state . " " . $zipcode . " ";
     }
 
 
     //checking if the payment amount matches the payment amount
-    if ($payment < $actual_price) {
+    if (number_format($payment, 2) < number_format($actual_price, 2)) {
         flash("$actual_price vs. $payment Incorrect Payment Amount!", "danger");
         $hasError = true;
     }
