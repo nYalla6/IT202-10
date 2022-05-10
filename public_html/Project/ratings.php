@@ -10,9 +10,9 @@ $user_id = get_user_id();
 $db = getDB();
 //see if the user has purchases to allow them to rate
 $purchase = false;
-$stmt = $db->prepare("SELECT Orders.id FROM Orders INNER JOIN OrderItems ON OrderItems.order_id = Orders.id WHERE Orders.user_id = :user_id && OrderItems.product_id = :product_id");
+$stmt = $db->prepare("SELECT Orders.id FROM Orders INNER JOIN OrderItems ON OrderItems.order_id = Orders.id WHERE Orders.user_id = :user_id AND OrderItems.product_id = :product_id");
 try {
-    $stmt->execute([":user_id" => $user_id, ":product_id" => $id]);
+    $stmt->execute([":user_id" => $user_id, ":product_id" => $product_id]);
     $r = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($r) {
         $purchase = true;
