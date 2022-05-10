@@ -175,10 +175,10 @@
     * For now limit to 10 most recent orders
     * A list item can be clicked to view the full details in the Order Details Page (similar to Order Confirmation Page except no “Thank you” message)
 
-- Milestone 4
-  * [ ] \(mm/dd/yyyy of completion) User can set their profile to be public or private (will need another column in Users table)
+- [Milestone 4](https://github.com/nYalla6/IT202-10/blob/prod/public_html/Project/milestone4.md)
+  * [X] \(05/09/2022) [User can set their profile to be public or private (will need another column in Users table)](https://ny6-prod.herokuapp.com/Project/profile.php?id=22)
       * If profile is public, hide email address from **other** users (email address should not be publicly visible to others)
-  * [ ] \(mm/dd/yyyy of completion) User will be able to rate a product they purchased
+  * [X] \(05/09/2022) [User will be able to rate a product they purchased](https://ny6-prod.herokuapp.com/Project/details.php?id=42)
       * Create table called <span style="text-decoration:underline;">Ratings</span> (id, product_id, user_id, rating, comment, created, modified)
       * 1-5 rating
       * Text Comment (use TEXT data type in sql)
@@ -187,25 +187,25 @@
           * Show the latest 10 reviews
           * Paginate anything beyond 10
       * Show the average rating on the Product Details Page
-  * [ ] \(mm/dd/yyyy of completion) User’s Purchase History Changes
+  * [X] \(05/09/2022) [User’s Purchase History Changes](https://ny6-prod.herokuapp.com/Project/order_history.php)
       * Filter by date range
       * Filter by category
       * Sort by total, date purchased, etc
       * Add pagination
           * Any filter/sort applied must be followed during the pagination process
-  * [ ] \(mm/dd/yyyy of completion) Store Owner Purchase History Changes
+  * [X] \(05/09/2022) [Store Owner Purchase History Changes](https://ny6-prod.herokuapp.com/Project/order_history.php)
       * Filter by Date Range
       * Filter by Category
       * Sort by total, date purchased, etc
       * Add pagination
           * Any filter/sort applied must be followed during the pagination process
       * The result page should show the accurate **total price** of the combined search results (i.e., if just 3 records show each of $25, it should show $75 total for this view)
-  * [ ] \(mm/dd/yyyy of completion) Add pagination to Shop Page (and any other product lists not yet mentioned)
-  * [ ] \(mm/dd/yyyy of completion) Store Owner will be able to see all products out of stock
+  * [X] \(05/09/2022)[Add pagination to Shop Page (and any other product lists not yet mentioned)](https://ny6-prod.herokuapp.com/Project/details.php?id=2)
+  * [X] \(05/09/2022) [Store Owner will be able to see all products out of stock](https://ny6-prod.herokuapp.com/Project/admin/list_items.php?itemName=&stock=0)
       * This will be added as a filter to their product list page from Milestone 2
       * Pagination should account for this new filter
       * Recommended to have the filter applied as a given value (i.e., where quantity is &lt;= value)
-  * [ ] \(mm/dd/yyyy of completion) User can sort products by average rating on the Shop Page
+  * [X] \(05/09/2022) [User can sort products by average rating on the Shop Page](https://ny6-prod.herokuapp.com/Project/home.php?name=&category=&col=avg_rating&order=desc )
       * Hint: may want to add an “average rating” field to the Products table and update this value any time a new rating is given for the product using an aggregate function
 
 ### Intructions
