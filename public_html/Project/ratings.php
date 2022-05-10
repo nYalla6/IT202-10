@@ -30,7 +30,7 @@ if (isset($_POST["rating"]) && isset($_POST["review"])) {
     $rating = se($_POST, "rating", -1, false);
     $comment = se($_POST, "review", "", false);
     //insert into table
-    $avg_rating = (($avg_rating * $num_rating) + $rating) / ($num_rating + 1);
+    $avg_rating = ((int)($avg_rating) + (int)($rating)) / 2;
     add_rating($product_id, $user_id, $rating, $comment);
     $stmt2 = $db->prepare("UPDATE Products SET avg_rating = $avg_rating, num_rating = num_rating+1 WHERE id= :product_id");
     try {
