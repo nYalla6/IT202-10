@@ -119,7 +119,7 @@ try {
             <h3>Total Spending: $<?php se(number_format($shop_total, 2)); ?></h3>
         </div>
     <?php endif ?>
-    <br>     
+    <br>
     <?php foreach ($results as $item) : ?>
         <?php $time = strtotime($item['created']);
         $date = date("m/d/Y", $time); ?>
