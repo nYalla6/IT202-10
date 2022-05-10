@@ -23,14 +23,8 @@ if (!empty($name)) {
 
 $stock = (int) se($_GET, "stock", -1, false);
 if ($stock >= 0) {
-    // if (!$stock){
-    //     flash("Empty list");
-    //     $query .= " AND stock < 1";
-    // }
-    // else {
-        $query .= " AND stock <= :stock";
-    // }
-    
+
+    $query .= " AND stock <= :stock";
     $params[":stock"] = $stock;
 }
 
